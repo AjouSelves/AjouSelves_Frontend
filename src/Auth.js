@@ -11,10 +11,13 @@ const Auth = () => {
 
   const KAKAO_OAUTH_TOKEN_API_URL = "https://kauth.kakao.com/oauth/token";
 
+  const MONGODB_URL =
+    "mongodb+srv://knamuuu:<password>@goods-by-us.t41vi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
   // callback으로 받은 인가 코드
   const code = new URL(window.location.href).searchParams.get("code");
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // 이것때문에 별로 할거면 함수이름 use로 custom Hooks 처리하셈
 
   const getToken = async () => {
     const payload = qs.stringify({
