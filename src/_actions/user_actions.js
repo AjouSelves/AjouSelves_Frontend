@@ -6,7 +6,10 @@ import { LOGIN_USER, REGISTER_USER, GET_ALL_USER } from "./types";
 export function loginUser(dataToSubmit) {
   const request = axios
     .post(`${SERVER_URL}/auth/login`, dataToSubmit)
-    .then((response) => response.data);
+    .then((response) => response.data)
+    .catch((err) => {
+      return err;
+    });
   return { type: LOGIN_USER, payload: request };
 }
 

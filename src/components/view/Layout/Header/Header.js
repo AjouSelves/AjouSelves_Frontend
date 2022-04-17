@@ -7,17 +7,34 @@ import logo from "../../../../images/logo.png";
 const StyledHeader = styled.header`
   display: flex;
   flex-direction: row;
+  position: fixed;
+  align-items: center;
+  justify-content: space-around;
+  height: 65px;
+  width: 100%;
+  top: 0px;
+
+  background-color: white;
   border-bottom: 1px solid #eeeeee;
 
-  align-items: center;
-  height: 122px;
-  width: 100%;
+  z-index: 1;
 `;
 
 const StyledUl = styled.ul`
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
   list-style: none;
+
+  width: 700px;
+  color: gray;
+`;
+
+const StyledLi = styled.li`
+  &:hover {
+    color: black;
+  }
 `;
 
 const StyledP = styled.p`
@@ -29,43 +46,59 @@ function Header() {
 
   return (
     <StyledHeader>
-      <img src={logo} width="300px" height="65px" alt="" />
+      <img src={logo} width="250px" height="55px" alt="" />
+      <div></div>
+      <div></div>
       <StyledUl>
-        <li>
-          <StyledP
-            onClick={() => {
-              navigate("/goods/add");
-            }}
-          >
-            굿즈 등록하기
-          </StyledP>
-        </li>
-        <li>
+        <StyledLi>
           <StyledP
             onClick={() => {
               navigate("/goods");
             }}
           >
-            굿즈 구매하기
+            구매하기
           </StyledP>
-        </li>
+        </StyledLi>
+        <StyledLi>
+          <StyledP
+            onClick={() => {
+              navigate("/goods/add");
+            }}
+          >
+            판매하기
+          </StyledP>
+        </StyledLi>
+        <StyledLi>
+          <StyledP>커뮤니티</StyledP>
+        </StyledLi>
+        <StyledLi>
+          <StyledP
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            로그인/회원가입하기
+          </StyledP>
+        </StyledLi>
       </StyledUl>
-      <StyledP>마이페이지</StyledP>
+
       {/* <img src={kakao_login} width="200px" height="80px" alt="" /> */}
-      <button
-        onClick={() => {
-          navigate("/login");
-        }}
-      >
-        login
-      </button>
-      <button
-        onClick={() => {
-          navigate("/register");
-        }}
-      >
-        register
-      </button>
+      {/* <div>
+        <button
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          login
+        </button>
+        <button
+          onClick={() => {
+            navigate("/register");
+          }}
+        >
+          register
+        </button>
+      </div> */}
     </StyledHeader>
   );
 }

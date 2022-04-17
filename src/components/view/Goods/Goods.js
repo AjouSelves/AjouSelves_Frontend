@@ -23,7 +23,7 @@ function Goods() {
   const [Goods, setGoods] = useState("");
 
   useEffect(() => {
-    dispatch(projGetById(2)).then((res) => {
+    dispatch(projGetById(7)).then((res) => {
       setGoods(res.payload);
       console.log(res);
     });

@@ -20,6 +20,7 @@ function RegisterPage() {
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [ConfirmPassword, setConfirmPassword] = useState("");
   const [Phonenumber, setPhonenumber] = useState("");
   const [Nickname, setNickname] = useState("");
   const [Status, setStatus] = useState("");
@@ -30,26 +31,6 @@ function RegisterPage() {
   const [Bank, setBank] = useState("");
   const [Account, setAccount] = useState("");
 
-  const onEmailHandler = (e) => {
-    setEmail(e.currentTarget.value);
-  };
-
-  const onPasswordHandler = (e) => {
-    setPassword(e.currentTarget.value);
-  };
-
-  const onNicknameHandler = (e) => {
-    setNickname(e.currentTarget.value);
-  };
-
-  const onBankHandler = (e) => {
-    setBank(e.currentTarget.value);
-  };
-
-  const onAccountHandler = (e) => {
-    setAccount(e.currentTarget.value);
-  };
-
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -59,81 +40,137 @@ function RegisterPage() {
       phonenumber: Phonenumber,
       nickname: Nickname,
       status: Status,
-      socialtype: Socialtype,
+      socialtype: "test",
       sex: Sex,
       birth: Birth,
-      address: Address,
+      address: "test",
       account: `${Bank} ${Account}`,
+      profilelink: "test",
     };
 
     console.log("body: ", body);
 
-    dispatch(registerUser(body)).then((res) => {
-      if (res.payload) {
-        alert("Register successed");
-        navigate("/");
-      } else {
-        alert("error");
-      }
-    });
+    if (Password !== ConfirmPassword) {
+      return alert("회원가입 완료!");
+    } else {
+      dispatch(registerUser(body)).then((res) => {
+        console.log(res);
+        if (res.payload) {
+          alert("회원가입 완료!");
+          navigate("/");
+        } else {
+          alert("error");
+        }
+      });
+    }
   };
 
   return (
     <div>
       <StyledForm onSubmit={onSubmitHandler}>
         <label>
-          이메일:
+          이메일:{" "}
           <input
             type="email"
             value={Email}
-            onChange={onEmailHandler}
-            placeholder="email"
+            onChange={(e) => {
+              setEmail(e.currentTarget.value);
+            }}
+            placeholder="이메일을 입력해주세요."
           />
         </label>
         <label>
-          비밀번호:
+          비밀번호:{" "}
           <input
             type="password"
             value={Password}
-            onChange={onPasswordHandler}
-            placeholder="password"
+            onChange={(e) => {
+              setPassword(e.currentTarget.value);
+            }}
+            placeholder="비밀번호"
           />
         </label>
         <label>
-          <input type="radio" name="status" value="재학생" />
+          비밀번호 확인:{" "}
+          <input
+            type="password"
+            value={ConfirmPassword}
+            onChange={(e) => {
+              setConfirmPassword(e.currentTarget.value);
+            }}
+            placeholder="비밀번호 확인"
+          />
+        </label>
+        <label>
+          전화번호:{" "}
+          <input
+            type="text"
+            value={Phonenumber}
+            onChange={(e) => {
+              setPhonenumber(e.currentTarget.value);
+            }}
+            placeholder="010-1234-5678"
+          />
+        </label>
+        <label>
+          닉네임:{" "}
+          <input
+            type="text"
+            value={Nickname}
+            onChange={(e) => {
+              setNickname(e.currentTarget.value);
+            }}
+            placeholder="닉네임"
+          />
+        </label>
+        <label
+          onChange={(e) => {
+            setStatus(e.target.value);
+          }}
+        >
+          구분: <input type="radio" name="status" value="재학생" />
           재학생
           <input type="radio" name="status" value="졸업생" />
           졸업생
           <input type="radio" name="status" value="외부인" />
           외부인
         </label>
-        <label>
-          닉네임:
-          <input
-            type="text"
-            value={Nickname}
-            onChange={onNicknameHandler}
-            placeholder="nickname"
-          />
-        </label>
-        <label>
-          성별:
-          <input type="radio" name="sex" value="남자" />
+
+        <label
+          onChange={(e) => {
+            setSex(e.target.value);
+          }}
+        >
+          성별: <input type="radio" name="sex" value="남자" />
           남자
           <input type="radio" name="sex" value="여자" />
           여자
         </label>
         <label>
-          생년월일:
-          <input type="date" name="birthday" />
+          생년월일:{" "}
+          <input
+            type="date"
+            name="birthday"
+            onChange={(e) => {
+              setBirth(e.target.value);
+            }}
+          />
         </label>
         <label>
           환불받을 계좌:{" "}
-          <input type="text" list="bank_list" onChange={onBankHandler} />
+          <input
+            type="text"
+            list="bank_list"
+            onChange={(e) => {
+              setBank(e.currentTarget.value);
+            }}
+          />
           <input
             type="text"
             placeholder="account"
-            onChange={onAccountHandler}
+            onChange={(e) => {
+              setAccount(e.currentTarget.value);
+            }}
           />
           <datalist id="bank_list">
             <option value="국민은행"></option>
@@ -143,7 +180,7 @@ function RegisterPage() {
             <option value="카카오뱅크"></option>
           </datalist>
         </label>
-        <button type="submit">Register</button>
+        <button type="submit">회원가입하기</button>
       </StyledForm>
     </div>
   );

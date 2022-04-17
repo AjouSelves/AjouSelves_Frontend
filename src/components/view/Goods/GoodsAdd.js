@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 
 import { projAdd } from "../../../_actions/goods_actions";
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100vh;
+`;
 
 function GoodsAdd() {
   const dispatch = useDispatch();
@@ -9,7 +20,7 @@ function GoodsAdd() {
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState("");
-  const [Minimum, setMinimum] = useState("");
+  const [Minimum, setMinimum] = useState();
   const [Category, setCategory] = useState("");
 
   const onSubmitHandler = (event) => {
@@ -20,7 +31,7 @@ function GoodsAdd() {
       title: Title,
       explaiend: Content,
       //image: Image,
-      min_num: 30,
+      min_num: Minimum,
       category: Category,
       required: "",
     };
@@ -37,7 +48,7 @@ function GoodsAdd() {
   };
   return (
     <div>
-      <form onSubmit={onSubmitHandler}>
+      <StyledForm onSubmit={onSubmitHandler}>
         제목
         <input
           type="text"
@@ -87,7 +98,7 @@ function GoodsAdd() {
           />
         </div>
         <button type="submit">등록</button>
-      </form>
+      </StyledForm>
     </div>
   );
 }

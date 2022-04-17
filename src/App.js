@@ -25,7 +25,7 @@ function App() {
           <Route path="/oauth/kakao/callback" element={<Auth />} />
 
           <Route path="/login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<Profile />} />
 
           <Route path="/goods" element={<GoodsTest />} />

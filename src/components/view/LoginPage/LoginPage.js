@@ -23,15 +23,11 @@ function LoginPage() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log("Email: ", Email);
-    console.log("Password: ", Password);
 
     let body = {
       email: Email,
       password: Password,
     };
-
-    console.log("dataToLogin", body);
 
     dispatch(loginUser(body)).then((res) => {
       if (res.payload.code === 200) {
@@ -39,7 +35,7 @@ function LoginPage() {
         localStorage.setItem("login-token", res.payload.token);
         navigate("/");
       } else {
-        alert("error");
+        alert("이메일 또는 비밀번호를 다시 확인해주세요.");
       }
     });
   };
@@ -48,12 +44,12 @@ function LoginPage() {
     <div>
       <StyledForm onSubmit={onSubmitHandler}>
         <input
-          type="text"
+          type="email"
           value={Email}
           onChange={(e) => {
             setEmail(e.currentTarget.value);
           }}
-          placeholder="ID"
+          placeholder="이메일"
         />
         <input
           type="password"
@@ -61,9 +57,18 @@ function LoginPage() {
           onChange={(e) => {
             setPassword(e.currentTarget.value);
           }}
-          placeholder="password"
+          placeholder="비밀번호"
         />
-        <button type="submit">Login</button>
+        <div>
+          <button type="submit">로그인</button>
+          <button
+            onClick={() => {
+              navigate("/register");
+            }}
+          >
+            회원가입하기
+          </button>
+        </div>
       </StyledForm>
     </div>
   );
