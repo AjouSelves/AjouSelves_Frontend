@@ -30,7 +30,7 @@ function GoodsAdd() {
       userid: 4,
       title: Title,
       explaiend: Content,
-      //image: Image,
+      image: Image,
       min_num: Minimum,
       category: Category,
       required: "",

@@ -35,7 +35,6 @@ function GoodsTest() {
 
   return (
     <GoodsListBlock>
-      Goods
       <GoodsList Goods={Goods[0]} />
     </GoodsListBlock>
   );

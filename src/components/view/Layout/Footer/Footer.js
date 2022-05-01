@@ -6,6 +6,8 @@ import { IoCall, IoMail } from "react-icons/io5";
 
 const StyledFooter = styled.footer`
   background-color: #333333;
+  position: static;
+  bottom: 0;
   width: 100%;
   height: 200px;
   color: white;

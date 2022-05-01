@@ -7,6 +7,8 @@ import main_image from "../../../images/main_image.png";
 
 const StyledDiv = styled.div`
   padding-top: 65px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const MainDiv = styled.div`
@@ -32,7 +34,7 @@ const MainP = styled.span`
   text-align: right;
 `;
 
-function Layout() {
+function Layout({ children }) {
   return (
     <StyledDiv>
       <Header />
@@ -50,7 +52,7 @@ function Layout() {
           </MainP>
         </div>
       </div>
-      <MainDiv>GOODS LIST</MainDiv>
+      <MainDiv>{children}</MainDiv>
       <Footer />
     </StyledDiv>
   );

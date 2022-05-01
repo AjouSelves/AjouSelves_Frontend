@@ -23,7 +23,6 @@ function LoginPage() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
     let body = {
       email: Email,
       password: Password,
@@ -41,7 +40,7 @@ function LoginPage() {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: "#F5F5F5" }}>
       <StyledForm onSubmit={onSubmitHandler}>
         <input
           type="email"

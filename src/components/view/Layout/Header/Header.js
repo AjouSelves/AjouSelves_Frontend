@@ -69,7 +69,13 @@ function Header() {
           </StyledP>
         </StyledLi>
         <StyledLi>
-          <StyledP>커뮤니티</StyledP>
+          <StyledP
+            onClick={() => {
+              alert("곧 서비스 예정입니다!");
+            }}
+          >
+            커뮤니티
+          </StyledP>
         </StyledLi>
         <StyledLi>
           <StyledP
@@ -81,24 +87,6 @@ function Header() {
           </StyledP>
         </StyledLi>
       </StyledUl>
-
-      {/* <img src={kakao_login} width="200px" height="80px" alt="" /> */}
-      {/* <div>
-        <button
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          login
-        </button>
-        <button
-          onClick={() => {
-            navigate("/register");
-          }}
-        >
-          register
-        </button>
-      </div> */}
     </StyledHeader>
   );
 }
