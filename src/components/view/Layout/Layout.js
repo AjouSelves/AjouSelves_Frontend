@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import main_image from "../../../images/main_image.png";
+import GlobalFonts from "../../../font/font";
 
 const StyledDiv = styled.div`
   padding-top: 65px;
@@ -11,22 +12,12 @@ const StyledDiv = styled.div`
   flex-direction: column;
 `;
 
-const MainDiv = styled.div`
-  height: 100px;
-`;
-
 const MainP = styled.span`
-  @font-face {
-    font-family: "S-CoreDream-9Black";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-9Black.woff")
-      format("woff");
-    font-weight: normal;
-    font-style: normal;
-  }
+  font-family: "S-CoreDream-9Black";
 
   position: absolute;
   top: 55%;
-  left: 60%;
+  left: 55%;
 
   color: white;
   font-weight: 900;
@@ -43,6 +34,7 @@ function Layout({ children }) {
           <img src={main_image} alt="" width="100%" />
         </div>
         <div>
+          <GlobalFonts />
           <MainP>
             '우리'가 기획하고 <br />
             '우리'가 구매하는
@@ -52,7 +44,7 @@ function Layout({ children }) {
           </MainP>
         </div>
       </div>
-      <MainDiv>{children}</MainDiv>
+      <div>{children}</div>
       <Footer />
     </StyledDiv>
   );

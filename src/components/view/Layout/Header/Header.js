@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -46,7 +46,16 @@ function Header() {
 
   return (
     <StyledHeader>
-      <img src={logo} width="250px" height="55px" alt="" />
+      <img
+        src={logo}
+        width="250px"
+        height="55px"
+        alt=""
+        onClick={() => {
+          navigate("/");
+        }}
+        style={{ cursor: "pointer" }}
+      />
       <div></div>
       <div></div>
       <StyledUl>

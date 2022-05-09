@@ -17,11 +17,11 @@ const StyledInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 330px;
+  width: 150px;
   height: 100px;
   position: relative;
-  top: 30px;
-  left: 1300px;
+  top: 20%;
+  left: 75%;
 `;
 
 const StyledIcon = styled.div`
@@ -30,8 +30,8 @@ const StyledIcon = styled.div`
   justify-content: space-around;
   width: 100px;
   position: relative;
-  top: 40px;
-  left: 1400px;
+  top: 25%;
+  left: 80%;
 `;
 
 const InstagramHandler = () => {
