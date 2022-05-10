@@ -1,25 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-import Layout from "../Layout/Layout";
+import GlobalFonts from "../../../font/font";
 import main_image from "../../../images/main_image.png";
 
-const MainDiv = styled.div`
-  height: 100px;
-`;
-
 const MainP = styled.span`
-  @font-face {
-    font-family: "S-CoreDream-9Black";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-9Black.woff")
-      format("woff");
-    font-weight: normal;
-    font-style: normal;
-  }
+  font-family: "S-CoreDream-9Black";
 
   position: absolute;
   top: 55%;
-  left: 60%;
+  left: 55%;
 
   color: white;
   font-weight: 900;
@@ -27,14 +17,19 @@ const MainP = styled.span`
   text-align: right;
 `;
 
+const MainDiv = styled.div`
+  height: 100px;
+`;
+
 function LandingPage() {
   return (
-    <Layout>
+    <div>
       <div style={{ position: "relative" }}>
         <div>
           <img src={main_image} alt="" width="100%" />
         </div>
         <div>
+          <GlobalFonts />
           <MainP>
             '우리'가 기획하고 <br />
             '우리'가 구매하는
@@ -45,7 +40,7 @@ function LandingPage() {
         </div>
       </div>
       <MainDiv>GOODS LIST</MainDiv>
-    </Layout>
+    </div>
   );
 }
 

@@ -29,21 +29,6 @@ function Layout({ children }) {
   return (
     <StyledDiv>
       <Header />
-      <div style={{ position: "relative" }}>
-        <div>
-          <img src={main_image} alt="" width="100%" />
-        </div>
-        <div>
-          <GlobalFonts />
-          <MainP>
-            '우리'가 기획하고 <br />
-            '우리'가 구매하는
-            <br />
-            우리학교 굿즈 제작 플랫폼 <br />
-            Goods By Us : 굿즈바이어스
-          </MainP>
-        </div>
-      </div>
       <div>{children}</div>
       <Footer />
     </StyledDiv>
