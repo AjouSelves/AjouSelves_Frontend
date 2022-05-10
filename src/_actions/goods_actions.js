@@ -28,21 +28,36 @@ export function projAddSingle(dataToAdd) {
   return { type: PROJ_ADD_SINGLE, payload: req };
 }
 
-export function projAddDouble(dataToAdd) {
-  const req = axios.post(`${SERVER_URL}`, dataToAdd).then((res) => res.data);
+export function projAddMulti(dataToAdd) {
+  const req = axios
+    .post(`${SERVER_URL}/proj/add/multi`, dataToAdd)
+    .then((res) => res.data);
   return { type: PROJ_ADD_DOUBLE, payload: req };
 }
 
-export function projEdit(id) {
+export function projEdit(id, header) {
   const req = axios
     .put(`${SERVER_URL}/proj/edit/${id}`)
     .then((res) => res.data);
   return { type: PROJ_EDIT, payload: req };
 }
 
+export function projEditSingle(id) {
+  const req = axios
+    .put(`${SERVER_URL}/proj/edit/single/${id}`)
+    .then((res) => res.data);
+  return { type: PROJ_EDIT, payload: req };
+}
+
+export function projEditMulti(id) {
+  const req = axios
+    .put(`${SERVER_URL}/proj/edit/multi/${id}`)
+    .then((res) => res.data);
+  return { type: PROJ_EDIT, payload: req };
+}
 export function projDelete(id, header) {
   const req = axios
-    .delete(`${SERVER_URL}/proj/delete/${id}`, "", header)
+    .delete(`${SERVER_URL}/proj/delete/${id}`, header)
     .then((res) => res.data);
   return { type: PROJ_DELETE, payload: req };
 }

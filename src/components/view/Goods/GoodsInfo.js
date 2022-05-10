@@ -34,7 +34,7 @@ function GoodsInfo(Goods) {
 
     console.log("header: ", header);
 
-    dispatch(projDelete(50, "", header)).then((res) => {
+    dispatch(projDelete(50, header)).then((res) => {
       if (res.payload.status === "success") {
         alert("삭제 완료");
       } else {
