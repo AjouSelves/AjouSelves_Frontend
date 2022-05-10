@@ -14,9 +14,9 @@ import {
   PROJ_LEAVE,
 } from "./types";
 
-export function projAdd(dataToAdd) {
+export function projAdd(body, header) {
   const req = axios
-    .post(`${SERVER_URL}/proj/add`, dataToAdd)
+    .post(`${SERVER_URL}/proj/add`, body, header)
     .then((res) => res.data);
   return { type: PROJ_ADD, payload: req };
 }
