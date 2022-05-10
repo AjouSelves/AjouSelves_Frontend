@@ -40,9 +40,9 @@ export function projEdit(id) {
   return { type: PROJ_EDIT, payload: req };
 }
 
-export function projDelete(id) {
+export function projDelete(id, header) {
   const req = axios
-    .delete(`${SERVER_URL}/proj/delete/${id}`)
+    .delete(`${SERVER_URL}/proj/delete/${id}`, "", header)
     .then((res) => res.data);
   return { type: PROJ_DELETE, payload: req };
 }
