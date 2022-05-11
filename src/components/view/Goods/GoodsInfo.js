@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import GlobalFonts from "../../../font/font";
 import thumbnail from "../../../images/thumbnail.jpeg";
-import { projDelete } from "../../../_actions/goods_actions";
+import { projDelete, projEdit } from "../../../_actions/goods_actions";
 
 const Container = styled.div`
   font-family: "S-CoreDream-9Black";
@@ -21,16 +22,17 @@ const Body = styled.div`
 
 function GoodsInfo(Goods) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const login_token = window.localStorage.getItem("login-token");
+  let header = {
+    headers: {
+      Authorization: login_token,
+    },
+  };
 
   const onDeleteHandler = () => {
     console.log("delete 실행");
-
-    const login_token = window.localStorage.getItem("login-token");
-    let header = {
-      headers: {
-        Authorization: login_token,
-      },
-    };
 
     console.log("header: ", header);
 
@@ -38,9 +40,16 @@ function GoodsInfo(Goods) {
       if (res.payload.status === "success") {
         alert("삭제 완료");
       } else {
-        alert("error");
+        alert("글 작성자만 삭제가 가능합니다.");
       }
     });
+  };
+
+  const onEditHandler = () => {
+    console.log("edit 실행");
+
+    console.log("header: ", header);
+    navigate("/goods/edit", { state: Goods });
   };
 
   const [Image] = useState(Goods.Goods.photos);
@@ -51,25 +60,26 @@ function GoodsInfo(Goods) {
       <div>
         <h2>{Goods.Goods.title}</h2>
         <button onClick={onDeleteHandler}>굿즈 삭제하기</button>
+        <button onClick={onEditHandler}>굿즈 수정하기</button>
       </div>
       <Body>
         <div>
-          image:
+          {/* image: {`http://44.202.49.100:3000${Image}`} */}
           {Image && (
-            // <img
-            //   alt="thumbnail"
-            //   src={`http://44.202.49.100:3000/${Image}`}
-            //   width="200px"
-            //   height="200px"
-            // />
             <img
-              src={
-                Image === ""
-                  ? `http://44.202.49.100:3000/${Image}`
-                  : { thumbnail }
-              }
-              alt=""
+              alt={"thumbnail"}
+              src={`http://44.202.49.100:3000${Image}`}
+              width="200px"
+              height="200px"
             />
+            // <img
+            //   src={
+            //     Image === ""
+            //       ? `http://44.202.49.100:3000/${Image}`
+            //       : { thumbnail }
+            //   }
+            //   alt=""
+            // />
           )}
         </div>
         <div>
