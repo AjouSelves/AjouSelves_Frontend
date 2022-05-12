@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import GlobalFonts from "../../../font/font";
-import { projAdd } from "../../../_actions/goods_actions";
+import thumbnail from "../../../images/thumbnail.jpeg";
+import { projAdd, projAddSingle } from "../../../_actions/goods_actions";
 
 // 굿즈 등록 component
 
@@ -23,19 +24,21 @@ function GoodsAdd() {
   const dispatch = useDispatch();
 
   const [Title, setTitle] = useState("");
-  const [Content, setContent] = useState("");
+  const [Explained, setExplained] = useState("");
   const [Image, setImage] = useState("");
+  const [ImageUrl, setImageUrl] = useState("");
   const [Minimum, setMinimum] = useState();
   const [Category, setCategory] = useState("");
+
+  const formData = new FormData();
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
     let body = {
-      userid: 4,
       title: Title,
-      explaiend: Content,
-      image: Image,
+      explaiend: Explained,
+      image: formData,
       min_num: Minimum,
       category: Category,
       required: "",
@@ -51,13 +54,25 @@ function GoodsAdd() {
     console.log("body: ", body);
     console.log("header: ", header);
 
-    dispatch(projAdd(body, header)).then((res) => {
-      if (res.payload.status === "success") {
-        alert("등록 완료");
-      } else {
-        alert("error");
-      }
-    });
+    if (Image === "") {
+      dispatch(projAdd(body, header)).then((res) => {
+        if (res.payload.status === "success") {
+          alert("등록 완료");
+        } else {
+          alert("error");
+        }
+      });
+    } else {
+      console.log("Image:", Image);
+      console.log("formData: ", formData);
+      dispatch(projAddSingle(body, header)).then((res) => {
+        if (res.payload.status === "success") {
+          alert("등록 완료");
+        } else {
+          alert("error");
+        }
+      });
+    }
   };
   return (
     <div>
@@ -75,8 +90,10 @@ function GoodsAdd() {
         <div>
           <p>썸네일을 업로드 해주시기 바랍니다.</p>
           <div>
-            {Image && (
-              <img alt="sample" src={Image} width="300px" height="300px" />
+            {Image === "" ? (
+              <img alt="thumbnail" src={thumbnail} />
+            ) : (
+              <img alt="error" src={ImageUrl} width="200px" height="200px" />
             )}
           </div>
           <input
@@ -84,7 +101,8 @@ function GoodsAdd() {
             accept="image/*"
             onChange={(e) => {
               e.preventDefault();
-              setImage(URL.createObjectURL(e.target.files[0]));
+              setImage(e.target.files[0]);
+              setImageUrl(URL.createObjectURL(e.target.files[0]));
             }}
           />
         </div>
@@ -93,7 +111,7 @@ function GoodsAdd() {
           <p>굿즈를 자유롭게 설명해 주시기 바랍니다.</p>
           <textarea
             onChange={(e) => {
-              setContent(e.currentTarget.value);
+              setExplained(e.currentTarget.value);
             }}
             style={{ width: "80%", height: "300px", resize: "none" }}
           ></textarea>

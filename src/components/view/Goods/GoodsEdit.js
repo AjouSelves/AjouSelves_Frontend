@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import GlobalFonts from "../../../font/font";
-import { projEdit, projGetById } from "../../../_actions/goods_actions";
+import { projEdit } from "../../../_actions/goods_actions";
 
 // 굿즈 등록 component
 
@@ -30,6 +30,7 @@ function GoodsEdit() {
   const [Title, setTitle] = useState(state.Goods.title);
   const [Explained, setExplained] = useState(state.Goods.explained);
   const [Image, setImage] = useState(state.Goods.photos);
+  const [ImageUrl, setImageUrl] = useState("");
   const [Minimum, setMinimum] = useState(state.Goods.min_num);
   const [Category, setCategory] = useState("");
 
@@ -85,7 +86,7 @@ function GoodsEdit() {
           <p>썸네일을 업로드 해주시기 바랍니다.</p>
           <div>
             {ChkChange ? (
-              <img alt="sample" src={Image} width="300px" height="300px" />
+              <img alt="sample" src={ImageUrl} width="300px" height="300px" />
             ) : (
               <img
                 alt="sample"
@@ -100,7 +101,8 @@ function GoodsEdit() {
             accept="image/*"
             onChange={(e) => {
               e.preventDefault();
-              setImage(URL.createObjectURL(e.target.files[0]));
+              setImage(e.target.files[0]);
+              setImageUrl(URL.createObjectURL(e.target.files[0]));
               setChkChange(true);
             }}
           />

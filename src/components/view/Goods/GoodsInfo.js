@@ -64,22 +64,15 @@ function GoodsInfo(Goods) {
       </div>
       <Body>
         <div>
-          {/* image: {`http://44.202.49.100:3000${Image}`} */}
-          {Image && (
+          {Image === "" ? (
             <img
-              alt={"thumbnail"}
+              alt="thumbnail"
               src={`http://44.202.49.100:3000${Image}`}
               width="200px"
               height="200px"
             />
-            // <img
-            //   src={
-            //     Image === ""
-            //       ? `http://44.202.49.100:3000/${Image}`
-            //       : { thumbnail }
-            //   }
-            //   alt=""
-            // />
+          ) : (
+            <img alt="thumbnail" src={thumbnail} />
           )}
         </div>
         <div>

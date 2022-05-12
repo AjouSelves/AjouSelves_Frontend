@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { projGetById } from "../../../_actions/goods_actions";
+import { projGetById, projGetAll } from "../../../_actions/goods_actions";
 
-import GoodsList from "./GoodsList.js";
+import GoodsInfo from "./GoodsInfo.js";
 
 const GoodsListBlock = styled.div`
   box-sizing: border-box;
@@ -25,7 +25,7 @@ function GoodsTest() {
   const [Goods, setGoods] = useState("");
 
   useEffect(() => {
-    dispatch(projGetById(6)).then((res) => {
+    dispatch(projGetById(20)).then((res) => {
       setGoods(res.payload);
       console.log(res.payload[0]);
     });
@@ -35,7 +35,7 @@ function GoodsTest() {
 
   return (
     <GoodsListBlock>
-      <GoodsList Goods={Goods[0]} />
+      <GoodsInfo Goods={Goods[0]} />
     </GoodsListBlock>
   );
 }

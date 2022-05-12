@@ -18,7 +18,7 @@ const MainP = styled.span`
 `;
 
 const MainDiv = styled.div`
-  height: 100px;
+  background-color: gray;
 `;
 
 function LandingPage() {

@@ -5,8 +5,10 @@ import { SERVER_URL } from "./types";
 import {
   PROJ_ADD,
   PROJ_ADD_SINGLE,
-  PROJ_ADD_DOUBLE,
+  PROJ_ADD_MULTI,
   PROJ_EDIT,
+  PROJ_EDIT_SINGLE,
+  PROJ_EDIT_MULTI,
   PROJ_DELETE,
   PROJ_GET_ALL,
   PROJ_GET_BY_ID,
@@ -21,9 +23,9 @@ export function projAdd(body, header) {
   return { type: PROJ_ADD, payload: req };
 }
 
-export function projAddSingle(dataToAdd) {
+export function projAddSingle(body, header) {
   const req = axios
-    .post(`${SERVER_URL}/proj/add/single`, dataToAdd)
+    .post(`${SERVER_URL}/proj/add/single`, body, header)
     .then((res) => res.data);
   return { type: PROJ_ADD_SINGLE, payload: req };
 }
@@ -32,28 +34,28 @@ export function projAddMulti(dataToAdd) {
   const req = axios
     .post(`${SERVER_URL}/proj/add/multi`, dataToAdd)
     .then((res) => res.data);
-  return { type: PROJ_ADD_DOUBLE, payload: req };
+  return { type: PROJ_ADD_MULTI, payload: req };
 }
 
-export function projEdit(id, header) {
+export function projEdit(id, body, header) {
   const req = axios
-    .put(`${SERVER_URL}/proj/edit/${id}`)
+    .put(`${SERVER_URL}/proj/edit/${id}`, body, header)
     .then((res) => res.data);
   return { type: PROJ_EDIT, payload: req };
 }
 
-export function projEditSingle(id) {
+export function projEditSingle(id, body, header) {
   const req = axios
-    .put(`${SERVER_URL}/proj/edit/single/${id}`)
+    .put(`${SERVER_URL}/proj/edit/single/${id}`, body, header)
     .then((res) => res.data);
-  return { type: PROJ_EDIT, payload: req };
+  return { type: PROJ_EDIT_SINGLE, payload: req };
 }
 
-export function projEditMulti(id) {
+export function projEditMulti(id, body, header) {
   const req = axios
-    .put(`${SERVER_URL}/proj/edit/multi/${id}`)
+    .put(`${SERVER_URL}/proj/edit/multi/${id}`, body, header)
     .then((res) => res.data);
-  return { type: PROJ_EDIT, payload: req };
+  return { type: PROJ_EDIT_MULTI, payload: req };
 }
 export function projDelete(id, header) {
   const req = axios

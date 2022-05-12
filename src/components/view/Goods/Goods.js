@@ -5,20 +5,15 @@ import styled from "styled-components";
 import { projGetAll, projGetById } from "../../../_actions/goods_actions";
 import thumbnail from "../../../images/thumbnail.jpeg";
 
-const GoodsListBlock = styled.div`
-  box-sizing: border-box;
-  padding-bottom: 3rem;
-  width: 768px;
-  margin: 0 auto;
-  margin-top: 2rem;
-  @media screen and (max-width: 768px) {
-    width: 100%auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-`;
-
 // 굿즈 정보 받아오는 컴포넌트
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+
+  padding: 50px 200px;
+`;
 
 function Goods() {
   const dispatch = useDispatch();
@@ -37,11 +32,20 @@ function Goods() {
   if (!Goods) return null;
 
   return (
-    <GoodsListBlock>
+    <Container>
       {Goods.map((Goods) => (
-        <div key={Goods.projid} goods={Goods}>
+        <div
+          key={Goods.projid}
+          goods={Goods}
+          style={{ "justify-content": "center" }}
+        >
           {Goods.url ? (
-            <img alt="no_image" src={`http://44.202.49.100:3000${Goods.url}`} />
+            <img
+              alt="no_image"
+              src={`http://44.202.49.100:3000${Goods.url}`}
+              width="300px"
+              height="300px"
+            />
           ) : (
             <img alt="thumbnail" src={thumbnail} />
           )}
@@ -53,7 +57,7 @@ function Goods() {
           <br />
         </div>
       ))}
-    </GoodsListBlock>
+    </Container>
   );
 }
 

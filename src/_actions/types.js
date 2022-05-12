@@ -13,8 +13,10 @@ export const GET_ALL_USER = "get_all_user";
 
 export const PROJ_ADD = "proj_add";
 export const PROJ_ADD_SINGLE = "proj_add_single";
-export const PROJ_ADD_DOUBLE = "proj_add_double";
+export const PROJ_ADD_MULTI = "proj_add_multi";
 export const PROJ_EDIT = "proj_edit";
+export const PROJ_EDIT_SINGLE = "proj_edit_single";
+export const PROJ_EDIT_MULTI = "proj_edit_multi";
 export const PROJ_DELETE = "proj_delete";
 export const PROJ_GET_ALL = "proj_get_all";
 export const PROJ_GET_BY_ID = "proj_get_by_id";
