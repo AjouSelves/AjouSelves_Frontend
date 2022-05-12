@@ -15,47 +15,56 @@ const Container = styled.div`
   padding: 50px 200px;
 `;
 
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+
+  padding: 20px;
+
+  cursor: pointer;
+`;
+
 function Goods() {
   const dispatch = useDispatch();
 
   const [Goods, setGoods] = useState("");
+  const [GoodsList, setGoodsList] = useState("");
 
   useEffect(() => {
     dispatch(projGetAll()).then((res) => {
-      setGoods(res.payload);
+      setGoodsList(res.payload);
       console.log(res);
     });
   }, []);
 
-  console.log(Goods);
+  console.log(GoodsList);
 
-  if (!Goods) return null;
+  if (!GoodsList) return null;
 
   return (
     <Container>
-      {Goods.map((Goods) => (
-        <div
-          key={Goods.projid}
-          goods={Goods}
-          style={{ "justify-content": "center" }}
+      {GoodsList.map((GoodsList) => (
+        <Card
+          key={GoodsList.projid}
+          goods={GoodsList}
+          onClick={() => {
+            console.log(GoodsList.projid);
+          }}
         >
-          {Goods.url ? (
+          {GoodsList.url ? (
             <img
               alt="no_image"
-              src={`http://44.202.49.100:3000${Goods.url}`}
+              src={`http://44.202.49.100:3000${GoodsList.url}`}
               width="300px"
               height="300px"
             />
           ) : (
-            <img alt="thumbnail" src={thumbnail} />
+            <img alt="thumbnail" src={thumbnail} width="300px" height="300px" />
           )}
-          <br />
-          {Goods.title}
-          <br />
-          {Goods.nickname}
-          <br />
-          <br />
-        </div>
+          <div>{GoodsList.title}</div>
+          <div>{GoodsList.nickname}</div>
+        </Card>
       ))}
     </Container>
   );
