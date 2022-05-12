@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { projGetById } from "../../../_actions/goods_actions";
+import { projGetAll, projGetById } from "../../../_actions/goods_actions";
+import thumbnail from "../../../images/thumbnail.jpeg";
 
 const GoodsListBlock = styled.div`
   box-sizing: border-box;
@@ -17,13 +18,15 @@ const GoodsListBlock = styled.div`
   }
 `;
 
+// 굿즈 정보 받아오는 컴포넌트
+
 function Goods() {
   const dispatch = useDispatch();
 
   const [Goods, setGoods] = useState("");
 
   useEffect(() => {
-    dispatch(projGetById(7)).then((res) => {
+    dispatch(projGetAll()).then((res) => {
       setGoods(res.payload);
       console.log(res);
     });
@@ -36,7 +39,19 @@ function Goods() {
   return (
     <GoodsListBlock>
       {Goods.map((Goods) => (
-        <div key={Goods.title} goods={Goods}></div>
+        <div key={Goods.projid} goods={Goods}>
+          {Goods.url ? (
+            <img alt="no_image" src={`http://44.202.49.100:3000${Goods.url}`} />
+          ) : (
+            <img alt="thumbnail" src={thumbnail} />
+          )}
+          <br />
+          {Goods.title}
+          <br />
+          {Goods.nickname}
+          <br />
+          <br />
+        </div>
       ))}
     </GoodsListBlock>
   );
