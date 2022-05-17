@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import logo from "../../../../images/logo.png";
 
@@ -44,6 +45,17 @@ const StyledP = styled.p`
 function Header() {
   const navigate = useNavigate();
 
+  const [Logined, setLogined] = useState(false);
+  const chk = useSelector((state) => state.user);
+  useEffect(() => {
+    if (chk.loginSuccess) {
+      console.log(chk.loginSuccess.token);
+      setLogined(!Logined);
+    } else {
+      console.log("chk is null");
+    }
+  }, [chk]);
+
   return (
     <StyledHeader>
       <img
@@ -56,8 +68,6 @@ function Header() {
         }}
         style={{ cursor: "pointer" }}
       />
-      <div></div>
-      <div></div>
       <StyledUl>
         <StyledLi>
           <StyledP
@@ -86,15 +96,28 @@ function Header() {
             커뮤니티
           </StyledP>
         </StyledLi>
-        <StyledLi>
-          <StyledP
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            로그인/회원가입하기
-          </StyledP>
-        </StyledLi>
+        {!Logined && (
+          <StyledLi>
+            <StyledP
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              로그인/회원가입하기
+            </StyledP>
+          </StyledLi>
+        )}
+        {Logined && (
+          <StyledLi>
+            <StyledP
+              onClick={() => {
+                navigate("/mypage");
+              }}
+            >
+              마이페이지
+            </StyledP>
+          </StyledLi>
+        )}
       </StyledUl>
     </StyledHeader>
   );
