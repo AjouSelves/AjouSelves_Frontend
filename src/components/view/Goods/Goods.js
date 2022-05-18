@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { projGetAll, projGetById } from "../../../_actions/goods_actions";
+import { SERVER_URL } from "../../../_actions/types";
+import { projGetAll } from "../../../_actions/goods_actions";
 import thumbnail from "../../../images/thumbnail.jpeg";
 
 // 굿즈 정보 받아오는 컴포넌트
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: center;
 
   padding: 50px 200px;
 `;
 
 const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: right;
-
   padding: 20px;
 
   cursor: pointer;
@@ -27,18 +25,15 @@ const Card = styled.div`
 
 function Goods() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [Goods, setGoods] = useState("");
   const [GoodsList, setGoodsList] = useState("");
 
   useEffect(() => {
     dispatch(projGetAll()).then((res) => {
       setGoodsList(res.payload);
-      console.log(res);
     });
   }, []);
-
-  console.log(GoodsList);
 
   if (!GoodsList) return null;
 
@@ -47,15 +42,15 @@ function Goods() {
       {GoodsList.map((GoodsList) => (
         <Card
           key={GoodsList.projid}
-          goods={GoodsList}
           onClick={() => {
             console.log(GoodsList.projid);
+            navigate("/goods/info", { state: GoodsList.projid });
           }}
         >
           {GoodsList.url ? (
             <img
               alt="no_image"
-              src={`http://44.202.49.100:3000${GoodsList.url}`}
+              src={`${SERVER_URL}${GoodsList.url}`}
               width="300px"
               height="300px"
             />

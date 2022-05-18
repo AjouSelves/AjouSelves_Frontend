@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import GlobalFonts from "../../../font/font";
 import { projEdit } from "../../../_actions/goods_actions";
+import { SERVER_URL } from "../../../_actions/types";
 
 // 굿즈 등록 component
 
@@ -22,24 +23,22 @@ const StyledForm = styled.form`
 
 function GoodsEdit() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { state } = useLocation();
   console.log(state);
-  console.log(state.Goods.photos);
 
-  const [Title, setTitle] = useState(state.Goods.title);
-  const [Explained, setExplained] = useState(state.Goods.explained);
-  const [Image, setImage] = useState(state.Goods.photos);
+  const [Title, setTitle] = useState(state.title);
+  const [Explained, setExplained] = useState(state.explained);
+  const [Image, setImage] = useState(state.url);
   const [ImageUrl, setImageUrl] = useState("");
-  const [Minimum, setMinimum] = useState(state.Goods.min_num);
+  const [Minimum, setMinimum] = useState(state.min_num);
   const [Category, setCategory] = useState("");
 
   const [ChkChange, setChkChange] = useState(false);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
-    const id = 55;
 
     let body = {
       title: Title,
@@ -60,11 +59,13 @@ function GoodsEdit() {
     console.log("body: ", body);
     console.log("header: ", header);
 
-    dispatch(projEdit(id, body, header)).then((res) => {
-      if (res.payload.status === "success") {
+    dispatch(projEdit(state.projid, body, header)).then((res) => {
+      if (res.payload.text === "success") {
         alert("수정 완료");
+        navigate("/goods");
       } else {
-        alert("error");
+        alert("글 작성자만 수정할 수 있습니다.");
+        navigate("/goods");
       }
     });
   };
@@ -86,11 +87,11 @@ function GoodsEdit() {
           <p>썸네일을 업로드 해주시기 바랍니다.</p>
           <div>
             {ChkChange ? (
-              <img alt="sample" src={ImageUrl} width="300px" height="300px" />
+              <img alt="no_image" src={ImageUrl} width="300px" height="300px" />
             ) : (
               <img
                 alt="sample"
-                src={`http://44.202.49.100:3000${Image}`}
+                src={`${SERVER_URL}${Image}`}
                 width="300px"
                 height="300px"
               />

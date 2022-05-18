@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import GlobalFonts from "../../../font/font";
@@ -22,6 +23,7 @@ const StyledForm = styled.form`
 
 function GoodsAdd() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [Title, setTitle] = useState("");
   const [Explained, setExplained] = useState("");
@@ -37,7 +39,7 @@ function GoodsAdd() {
 
     let body = {
       title: Title,
-      explaiend: Explained,
+      explained: Explained,
       image: formData,
       min_num: Minimum,
       category: Category,
@@ -58,6 +60,7 @@ function GoodsAdd() {
       dispatch(projAdd(body, header)).then((res) => {
         if (res.payload.status === "success") {
           alert("등록 완료");
+          navigate("/goods");
         } else {
           alert("error");
         }
@@ -68,6 +71,7 @@ function GoodsAdd() {
       dispatch(projAddSingle(body, header)).then((res) => {
         if (res.payload.status === "success") {
           alert("등록 완료");
+          navigate("/goods");
         } else {
           alert("error");
         }
