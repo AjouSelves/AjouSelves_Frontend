@@ -42,7 +42,7 @@ function GoodsEdit() {
 
     let body = {
       title: Title,
-      explaiend: Explained,
+      explained: Explained,
       image: Image,
       min_num: Minimum,
       category: Category,
