@@ -17,10 +17,6 @@ const MainP = styled.span`
   text-align: right;
 `;
 
-const MainDiv = styled.div`
-  background-color: gray;
-`;
-
 function LandingPage() {
   return (
     <div>
@@ -39,7 +35,7 @@ function LandingPage() {
           </MainP>
         </div>
       </div>
-      <MainDiv>GOODS LIST</MainDiv>
+      {/* <MainDiv>GOODS LIST</MainDiv> */}
     </div>
   );
 }
