@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 import GlobalFonts from "../../../font/font";
 import main_image from "../../../images/main_image.png";
+import LandingPage0 from "../../../images/LandingPage0.png";
+import LandingPage1 from "../../../images/LandingPage1.png";
+import LandingPage2 from "../../../images/LandingPage2.png";
 
 const MainP = styled.span`
   font-family: "S-CoreDream-9Black";
@@ -20,7 +23,7 @@ const MainP = styled.span`
 function LandingPage() {
   return (
     <div>
-      <div style={{ position: "relative" }}>
+      {/* <div style={{ position: "relative" }}>
         <div>
           <img src={main_image} alt="" width="100%" />
         </div>
@@ -34,6 +37,15 @@ function LandingPage() {
             Goods By Us : 굿즈바이어스
           </MainP>
         </div>
+      </div> */}
+      <div>
+        <img src={LandingPage0} alt="" width="100%" />
+      </div>
+      <div>
+        <img src={LandingPage1} alt="" width="100%" />
+      </div>
+      <div>
+        <img src={LandingPage2} alt="" width="100%" />
       </div>
       {/* <MainDiv>GOODS LIST</MainDiv> */}
     </div>

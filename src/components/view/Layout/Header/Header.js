@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import logo from "../../../../images/logo.png";
+import logo from "../../../../images/logo2.png";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -11,12 +11,11 @@ const StyledHeader = styled.header`
   position: fixed;
   align-items: center;
   justify-content: space-around;
-  height: 65px;
+  height: 80px;
   width: 100%;
   top: 0px;
 
-  background-color: white;
-  border-bottom: 1px solid #eeeeee;
+  background-color: #24272b;
 
   z-index: 1;
 `;
@@ -34,7 +33,7 @@ const StyledUl = styled.ul`
 
 const StyledLi = styled.li`
   &:hover {
-    color: black;
+    color: white;
   }
 `;
 
@@ -60,8 +59,8 @@ function Header() {
     <StyledHeader>
       <img
         src={logo}
-        width="250px"
-        height="55px"
+        width="220px"
+        height="60px"
         alt=""
         onClick={() => {
           navigate("/");
