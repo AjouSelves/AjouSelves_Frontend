@@ -1,4 +1,4 @@
-export const SERVER_URL = "http://52.206.105.200:3000";
+export const SERVER_URL = "http://goodsbyus.com/api";
 
 export const MODE_GET_ALL = "get_all";
 export const MODE_GET_BY_ID = "get_by_id";
