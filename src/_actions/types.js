@@ -1,4 +1,5 @@
-export const SERVER_URL = "http://goodsbyus.com/api";
+export const SERVER_URL_API = "http://goodsbyus.com/api";
+export const SERVER_URL = "http://goodsbyus.com";
 
 export const MODE_GET_ALL = "get_all";
 export const MODE_GET_BY_ID = "get_by_id";
@@ -12,8 +13,7 @@ export const REGISTER_USER = "register_user";
 export const GET_ALL_USER = "get_all_user";
 
 export const PROJ_ADD = "proj_add";
-export const PROJ_ADD_SINGLE = "proj_add_single";
-export const PROJ_ADD_MULTI = "proj_add_multi";
+export const PROJ_ADD_PHOTO = "proj_add_photo";
 export const PROJ_EDIT = "proj_edit";
 export const PROJ_EDIT_SINGLE = "proj_edit_single";
 export const PROJ_EDIT_MULTI = "proj_edit_multi";

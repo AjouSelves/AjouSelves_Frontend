@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import GlobalFonts from "../../../font/font";
 import thumbnail from "../../../images/thumbnail.jpeg";
-import { projAdd, projAddSingle } from "../../../_actions/goods_actions";
+import { projAdd, projAddPhoto } from "../../../_actions/goods_actions";
 
 // 굿즈 등록 component
 
@@ -49,14 +49,14 @@ function GoodsAdd() {
     const login_token = window.localStorage.getItem("login-token");
     let header = {
       headers: {
+        "Content-Type": "multipart/form-data",
         Authorization: login_token,
       },
     };
 
-    console.log("body: ", body);
-    console.log("header: ", header);
-
     if (Image === "") {
+      console.log("body: ", body);
+      console.log("header: ", header);
       dispatch(projAdd(body, header)).then((res) => {
         if (res.payload.status === "success") {
           alert("등록 완료");
@@ -68,7 +68,7 @@ function GoodsAdd() {
     } else {
       console.log("Image:", Image);
       console.log("formData: ", formData);
-      dispatch(projAddSingle(body, header)).then((res) => {
+      dispatch(projAddPhoto(body, header)).then((res) => {
         if (res.payload.status === "success") {
           alert("등록 완료");
           navigate("/goods");
@@ -105,8 +105,15 @@ function GoodsAdd() {
             accept="image/*"
             onChange={(e) => {
               e.preventDefault();
+              const formData = new FormData();
+              formData.append(
+                "photo",
+                e.target.files.length && e.target.files[0].uploadedFile
+              );
               setImage(e.target.files[0]);
               setImageUrl(URL.createObjectURL(e.target.files[0]));
+
+              console.log(formData);
             }}
           />
         </div>

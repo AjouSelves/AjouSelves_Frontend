@@ -14,7 +14,7 @@ const Container = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: center;
 
-  padding: 50px 200px;
+  padding: 250px 100px;
 `;
 
 const Card = styled.div`

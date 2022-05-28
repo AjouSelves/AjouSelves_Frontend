@@ -25,7 +25,6 @@ function RegisterPage() {
   const [Nickname, setNickname] = useState("");
   const [Status, setStatus] = useState("");
   const [Socialtype, setSocialtype] = useState("");
-  const [Sex, setSex] = useState("");
   const [Birth, setBirth] = useState("");
   const [Address, setAddress] = useState("");
   const [Bank, setBank] = useState("");
@@ -41,10 +40,9 @@ function RegisterPage() {
       nickname: Nickname,
       status: Status,
       socialtype: "test",
-      sex: Sex,
       birth: Birth,
       address: "test",
-      account: `${Bank} ${Account}`,
+      account: `${Account}`,
       profilelink: "test",
     };
 
@@ -102,7 +100,7 @@ function RegisterPage() {
           />
         </label>
         <label>
-          전화번호:{" "}
+          <span>전화번호: </span>
           <input
             type="text"
             value={Phonenumber}
@@ -113,7 +111,7 @@ function RegisterPage() {
           />
         </label>
         <label>
-          닉네임:{" "}
+          <span>닉네임:</span>
           <input
             type="text"
             value={Nickname}
@@ -128,23 +126,12 @@ function RegisterPage() {
             setStatus(e.target.value);
           }}
         >
-          구분: <input type="radio" name="status" value="재학생" />
+          학적상태 선택: <input type="radio" name="status" value="재학생" />
           재학생
           <input type="radio" name="status" value="졸업생" />
           졸업생
           <input type="radio" name="status" value="외부인" />
           외부인
-        </label>
-
-        <label
-          onChange={(e) => {
-            setSex(e.target.value);
-          }}
-        >
-          성별: <input type="radio" name="sex" value="남자" />
-          남자
-          <input type="radio" name="sex" value="여자" />
-          여자
         </label>
         <label>
           생년월일:{" "}

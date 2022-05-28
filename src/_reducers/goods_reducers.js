@@ -1,7 +1,6 @@
 import {
   PROJ_ADD,
-  PROJ_ADD_SINGLE,
-  PROJ_ADD_MULTI,
+  PROJ_ADD_PHOTO,
   PROJ_EDIT,
   PROJ_EDIT_SINGLE,
   PROJ_EDIT_MULTI,
@@ -18,11 +17,11 @@ export default function (state = {}, action) {
     case PROJ_ADD:
       return { ...state, addSuccess: action.payload };
 
-    case PROJ_ADD_SINGLE:
+    case PROJ_ADD_PHOTO:
       return { ...state, addSuccess: action.payload };
 
-    case PROJ_ADD_MULTI:
-      return { ...state, addSuccess: action.payload };
+    // case PROJ_ADD_MULTI:
+    //   return { ...state, addSuccess: action.payload };
 
     case PROJ_EDIT:
       return { ...state, editSuccess: action.payload };

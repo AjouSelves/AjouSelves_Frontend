@@ -14,6 +14,13 @@ const StyledForm = styled.form`
   height: 100vh;
 `;
 
+const StyledInput = styled.input`
+  border: 1px solid #acacac;
+
+  font-size: 14px;
+  height: 48px;
+`;
+
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,7 +37,7 @@ function LoginPage() {
 
     dispatch(loginUser(body)).then((res) => {
       if (res.payload.code === 200) {
-        //alert("Login successed");
+        alert("로그인 성공");
         localStorage.setItem("login-token", res.payload.token);
         navigate("/");
       } else {
@@ -40,24 +47,24 @@ function LoginPage() {
   };
 
   return (
-    <div style={{ backgroundColor: "#F5F5F5" }}>
+    <div style={{ backgroundColor: "#F5F5F5", textAlign: "left" }}>
       <StyledForm onSubmit={onSubmitHandler}>
-        <input
+        <StyledInput
           type="email"
           value={Email}
           onChange={(e) => {
             setEmail(e.currentTarget.value);
           }}
           placeholder="이메일"
-        />
-        <input
+        ></StyledInput>
+        <StyledInput
           type="password"
           value={Password}
           onChange={(e) => {
             setPassword(e.currentTarget.value);
           }}
           placeholder="비밀번호"
-        />
+        ></StyledInput>
         <div>
           <button type="submit">로그인</button>
           <button
