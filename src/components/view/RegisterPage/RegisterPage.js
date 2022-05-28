@@ -24,6 +24,7 @@ function RegisterPage() {
   const [Phonenumber, setPhonenumber] = useState("");
   const [Nickname, setNickname] = useState("");
   const [Status, setStatus] = useState("");
+  const [Name, setName] = useState("");
   const [Socialtype, setSocialtype] = useState("");
   const [Birth, setBirth] = useState("");
   const [Address, setAddress] = useState("");
@@ -37,9 +38,10 @@ function RegisterPage() {
       email: Email,
       password: Password,
       phonenumber: Phonenumber,
+      name: Name,
       nickname: Nickname,
       status: Status,
-      socialtype: "test",
+      socialtype: "local",
       birth: Birth,
       address: "test",
       account: `${Account}`,
@@ -97,6 +99,17 @@ function RegisterPage() {
               setConfirmPassword(e.currentTarget.value);
             }}
             placeholder="비밀번호 확인"
+          />
+        </label>
+        <label>
+          이름:{" "}
+          <input
+            type="text"
+            value={Name}
+            onChange={(e) => {
+              setName(e.currentTarget.value);
+            }}
+            placeholder="이름"
           />
         </label>
         <label>

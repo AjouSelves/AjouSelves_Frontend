@@ -49,7 +49,6 @@ function GoodsAdd() {
     const login_token = window.localStorage.getItem("login-token");
     let header = {
       headers: {
-        "Content-Type": "multipart/form-data",
         Authorization: login_token,
       },
     };
