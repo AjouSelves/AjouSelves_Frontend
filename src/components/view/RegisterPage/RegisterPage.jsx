@@ -37,15 +37,15 @@ function RegisterPage() {
     let body = {
       email: Email,
       password: Password,
-      phonenumber: Phonenumber,
       name: Name,
+      phonenumber: Phonenumber,
+
       nickname: Nickname,
       status: Status,
       socialtype: "local",
       birth: Birth,
       address: "test",
-      account: `${Account}`,
-      profilelink: "test",
+      account: `${Bank} ${Account}`,
     };
 
     console.log("body: ", body);

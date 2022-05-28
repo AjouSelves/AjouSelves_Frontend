@@ -47,13 +47,13 @@ function GoodsAdd() {
     };
 
     const login_token = window.localStorage.getItem("login-token");
-    let header = {
-      headers: {
-        Authorization: login_token,
-      },
-    };
 
     if (Image === "") {
+      let header = {
+        headers: {
+          Authorization: login_token,
+        },
+      };
       console.log("body: ", body);
       console.log("header: ", header);
       dispatch(projAdd(body, header)).then((res) => {
@@ -65,6 +65,12 @@ function GoodsAdd() {
         }
       });
     } else {
+      let header = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: login_token,
+        },
+      };
       console.log("Image:", Image);
       console.log("formData: ", formData);
       dispatch(projAddPhoto(body, header)).then((res) => {
