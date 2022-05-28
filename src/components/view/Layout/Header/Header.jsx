@@ -117,6 +117,20 @@ function Header() {
             </StyledP>
           </StyledLi>
         )}
+        {Logined && (
+          <StyledLi>
+            <StyledP
+              onClick={() => {
+                alert("로그아웃 되었습니다!");
+
+                localStorage.clear();
+                window.location.reload();
+              }}
+            >
+              로그아웃
+            </StyledP>
+          </StyledLi>
+        )}
       </StyledUl>
     </StyledHeader>
   );
