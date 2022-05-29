@@ -27,8 +27,8 @@ function GoodsAdd() {
 
   const [Title, setTitle] = useState("");
   const [Explained, setExplained] = useState("");
-  const [Image, setImage] = useState("");
   const [ImageUrl, setImageUrl] = useState("");
+  const [Files, setFiles] = useState();
   const [Minimum, setMinimum] = useState();
   const [Category, setCategory] = useState("");
 
@@ -37,22 +37,21 @@ function GoodsAdd() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
-    let body = {
-      title: Title,
-      explained: Explained,
-      image: formData,
-      min_num: Minimum,
-      category: Category,
-      required: "",
-    };
-
     const login_token = window.localStorage.getItem("login-token");
 
-    if (Image === "") {
+    if (Files === undefined) {
       let header = {
         headers: {
           Authorization: login_token,
         },
+      };
+      let body = {
+        title: Title,
+        explained: Explained,
+        image: "",
+        min_num: Minimum,
+        category: Category,
+        required: "",
       };
       console.log("body: ", body);
       console.log("header: ", header);
@@ -71,9 +70,21 @@ function GoodsAdd() {
           Authorization: login_token,
         },
       };
-      console.log("Image:", Image);
-      console.log("formData: ", formData);
-      dispatch(projAddPhoto(body, header)).then((res) => {
+
+      console.log("Files is");
+      console.log(Files);
+
+      formData.append("title", Title);
+      formData.append("explained", Explained);
+      formData.append("min_num", Minimum);
+      formData.append("category", Category);
+      formData.append("required", "");
+
+      for (var i = 0; i < Files.length; i++) {
+        formData.append("photo", Files[i]);
+      }
+
+      dispatch(projAddPhoto(formData, header)).then((res) => {
         if (res.payload.status === "success") {
           alert("등록 완료");
           navigate("/goods");
@@ -99,7 +110,7 @@ function GoodsAdd() {
         <div>
           <p>썸네일을 업로드 해주시기 바랍니다.</p>
           <div>
-            {Image === "" ? (
+            {ImageUrl === "" ? (
               <img alt="thumbnail" src={thumbnail} />
             ) : (
               <img alt="error" src={ImageUrl} width="200px" height="200px" />
@@ -107,18 +118,12 @@ function GoodsAdd() {
           </div>
           <input
             type="file"
+            multiple
             accept="image/*"
             onChange={(e) => {
-              e.preventDefault();
-              const formData = new FormData();
-              formData.append(
-                "photo",
-                e.target.files.length && e.target.files[0].uploadedFile
-              );
-              setImage(e.target.files[0]);
+              const files = e.target.files;
+              setFiles(files);
               setImageUrl(URL.createObjectURL(e.target.files[0]));
-
-              console.log(formData);
             }}
           />
         </div>

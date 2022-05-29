@@ -2,8 +2,7 @@ import {
   PROJ_ADD,
   PROJ_ADD_PHOTO,
   PROJ_EDIT,
-  PROJ_EDIT_SINGLE,
-  PROJ_EDIT_MULTI,
+  PROJ_EDIT_PHOTO,
   PROJ_DELETE,
   PROJ_GET_ALL,
   PROJ_GET_BY_ID,
@@ -26,10 +25,7 @@ export default function (state = {}, action) {
     case PROJ_EDIT:
       return { ...state, editSuccess: action.payload };
 
-    case PROJ_EDIT_SINGLE:
-      return { ...state, editSuccess: action.payload };
-
-    case PROJ_EDIT_MULTI:
+    case PROJ_EDIT_PHOTO:
       return { ...state, editSuccess: action.payload };
 
     case PROJ_DELETE:

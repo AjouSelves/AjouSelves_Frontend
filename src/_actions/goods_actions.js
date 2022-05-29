@@ -6,8 +6,7 @@ import {
   PROJ_ADD,
   PROJ_ADD_PHOTO,
   PROJ_EDIT,
-  PROJ_EDIT_SINGLE,
-  PROJ_EDIT_MULTI,
+  PROJ_EDIT_PHOTO,
   PROJ_DELETE,
   PROJ_GET_ALL,
   PROJ_GET_BY_ID,
@@ -43,19 +42,13 @@ export function projEdit(id, body, header) {
   return { type: PROJ_EDIT, payload: req };
 }
 
-export function projEditSingle(id, body, header) {
+export function projEditPhoto(id, body, header) {
   const req = axios
-    .put(`${SERVER_URL_API}/proj/edit/single/${id}`, body, header)
+    .put(`${SERVER_URL_API}/proj/edit_multi/${id}`, body, header)
     .then((res) => res.data);
-  return { type: PROJ_EDIT_SINGLE, payload: req };
+  return { type: PROJ_EDIT_PHOTO, payload: req };
 }
 
-export function projEditMulti(id, body, header) {
-  const req = axios
-    .put(`${SERVER_URL_API}/proj/edit/multi/${id}`, body, header)
-    .then((res) => res.data);
-  return { type: PROJ_EDIT_MULTI, payload: req };
-}
 export function projDelete(id, header) {
   const req = axios
     .delete(`${SERVER_URL_API}/proj/delete/${id}`, header)
