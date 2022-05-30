@@ -9,16 +9,15 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
+  align-items: left;
+  margin: 30px 0;
+  font-size: 14px;
 `;
 
 const StyledInput = styled.input`
-  border: 1px solid #acacac;
-
-  font-size: 14px;
+  width: 100%;
   height: 48px;
+  margin-top: 10px;
 `;
 
 function LoginPage() {
@@ -36,7 +35,7 @@ function LoginPage() {
     };
 
     dispatch(loginUser(body)).then((res) => {
-      if (res.payload.code === 200) {
+      if (res.payload.status === "success") {
         alert("로그인 성공");
         localStorage.setItem("login-token", res.payload.token);
         navigate("/");
@@ -47,7 +46,7 @@ function LoginPage() {
   };
 
   return (
-    <div style={{ backgroundColor: "#F5F5F5", textAlign: "left" }}>
+    <div style={{ width: "384px", margin: "200px auto" }}>
       <StyledForm onSubmit={onSubmitHandler}>
         <StyledInput
           type="email"
