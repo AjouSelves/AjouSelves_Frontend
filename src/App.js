@@ -10,6 +10,7 @@ import GoodsEdit from "./components/view/Goods/GoodsEdit";
 import LoginPage from "./components/view/LoginPage/LoginPage";
 import RegisterPage from "./components/view/RegisterPage/RegisterPage";
 import LandingPage from "./components/view/LandingPage/LandingPage";
+import MyPage from "./Page/MyPage/MyPage";
 
 import "./App.css";
 
@@ -29,7 +30,7 @@ function App() {
             path="/register"
             element={<Layout children={<RegisterPage />} />}
           />
-
+          <Route path="/mypage" element={<Layout children={<MyPage />} />} />
           <Route path="/goods" element={<Layout children={<Goods />} />} />
           <Route
             path="/goods/info"

@@ -46,6 +46,7 @@ function Header() {
 
   const [Logined, setLogined] = useState(false);
   const chk = useSelector((state) => state.user);
+
   useEffect(() => {
     if (chk.loginSuccess) {
       console.log(chk.loginSuccess.token);
@@ -53,7 +54,7 @@ function Header() {
     } else {
       console.log("chk is null");
     }
-  }, [chk]);
+  }, [chk.loginSuccess]);
 
   return (
     <StyledHeader>
@@ -110,7 +111,7 @@ function Header() {
           <StyledLi>
             <StyledP
               onClick={() => {
-                navigate("/mypage");
+                navigate("/mypage", { state: chk.loginSuccess.token });
               }}
             >
               마이페이지
@@ -124,6 +125,7 @@ function Header() {
                 alert("로그아웃 되었습니다!");
 
                 localStorage.clear();
+                navigate("/");
                 window.location.reload();
               }}
             >

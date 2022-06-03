@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { SERVER_URL_API } from "./types";
-import { LOGIN_USER, REGISTER_USER, GET_ALL_USER } from "./types";
+import { LOGIN_USER, REGISTER_USER, GET_USER_INFO } from "./types";
 
 export function loginUser(dataToSubmit) {
   const request = axios
@@ -20,10 +20,10 @@ export function registerUser(dataToSubmit) {
   return { type: REGISTER_USER, payload: request };
 }
 
-export function getUser() {
+export function getUserInfo(header) {
   const request = axios
-    .get(`${SERVER_URL_API}/user`)
+    .get(`${SERVER_URL_API}/user`, header)
     .then((response) => response.data);
 
-  return { type: GET_ALL_USER, payload: request };
+  return { type: GET_USER_INFO, payload: request };
 }
