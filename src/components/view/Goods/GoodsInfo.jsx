@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import GlobalFonts from "../../../font/font";
 import thumbnail from "../../../images/thumbnail.jpeg";
 import { SERVER_URL } from "../../../_actions/types";
-import { projDelete } from "../../../_actions/goods_actions";
+import { projDelete, projJoin } from "../../../_actions/goods_actions";
 
 const Container = styled.div`
   font-family: "S-CoreDream-9Black";
@@ -75,6 +75,17 @@ function GoodsInfo() {
     navigate("/goods/edit", { state: Goods });
   };
 
+  const onJoinHandler = () => {
+    dispatch(projJoin(Goods.projid, header)).then((res) => {
+      if (res.payload.status === "success") {
+        alert("참여를 성공했습니다!");
+        window.location.reload();
+      } else {
+        alert("이미 참여한 프로젝트입니다!");
+      }
+    });
+  };
+
   console.log(Goods);
 
   const [Image] = useState(Goods.url);
@@ -84,41 +95,62 @@ function GoodsInfo() {
     <GoodsListBlock>
       <Container>
         <GlobalFonts />
-        <div>
-          <h2>{Goods.title}</h2>
-          <button onClick={onDeleteHandler}>굿즈 삭제하기</button>
-          <button onClick={onEditHandler}>굿즈 수정하기</button>
-        </div>
+
         <Body>
           <div>
             {!Image ? (
-              <img alt="thumbnail" src={thumbnail} />
+              <img
+                alt="thumbnail"
+                src={thumbnail}
+                width="400px"
+                height="400px"
+              />
             ) : (
               <img
                 alt="thumbnail"
                 src={`${SERVER_URL}${Image}`}
-                width="200px"
-                height="200px"
+                width="400px"
+                height="400px"
               />
             )}
-          </div>
-          <div>
-            <div>상품 구성: </div>
-            <div>목표 금액: </div>
             <div>
-              판매 일정:
-              <div>판매 종료: </div>
-              <div>결제 예정: </div>
-              <div>발송 예정: </div>
+              <button onClick={onDeleteHandler}>굿즈 삭제하기</button>
+              <button onClick={onEditHandler}>굿즈 수정하기</button>
             </div>
-            <div>문의 연락처: </div>
-            <button>굿즈 구매하러 가기</button>
+          </div>
+
+          <div>
+            <h2
+              style={{ borderBottom: "2px solid black", paddingBottom: "20px" }}
+            >
+              {Goods.title}
+            </h2>
+
+            <div style={{ padding: "10px" }}>상품 구성: </div>
+
+            <div style={{ padding: "10px" }}>목표 금액: </div>
+            <hr />
+
+            <div style={{ padding: "10px" }}>
+              최소 모집인원: {Goods.min_num}
+            </div>
+
+            <div style={{ padding: "10px" }}>
+              현재 참여인원: {Goods.cur_num}
+            </div>
+
+            <div style={{ padding: "10px" }}>발송 예정: </div>
+            <hr />
+
+            <div style={{ padding: "10px" }}>문의 연락처: </div>
+            <button style={{ width: "100%" }} onClick={onJoinHandler}>
+              펀딩 참여하러 가기
+            </button>
           </div>
         </Body>
-        <div>
+        <div style={{ marginTop: "150px" }}>
           <h2>굿즈 소개</h2>
           <div>{Goods.explained}</div>
-          <div>{Goods.projid}</div>
         </div>
       </Container>
     </GoodsListBlock>

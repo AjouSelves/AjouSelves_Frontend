@@ -65,7 +65,7 @@ function UserInfo(props) {
   const [Nickname, setNickname] = useState(info.nickname);
   const [Password, setPassword] = useState();
   const [ConfirmPassword, setConfirmPassword] = useState();
-  const [Birth, setBirth] = useState(info.birth.split("T")[0]);
+  const [Birth, setBirth] = useState(info.birth);
 
   const editInfo = (e) => {
     e.preventDefault();
@@ -85,12 +85,21 @@ function UserInfo(props) {
       phonenumber: info.phonenumber,
       nickname: Nickname,
       status: info.status,
-      socialtype: info.socialtype,
-      birth: Birth,
-      address: info.address,
-      sex: info.sex,
-      account: info.account,
+      socialtype: "local",
+      birth: "1999-09-13",
+      account: "",
+      profilelink: "",
     };
+
+    console.log(body);
+
+    // email: Email,
+    //   password: Password,
+    //   name: Name,
+    //   phonenumber: Phonenumber,
+    //   nickname: Nickname,
+    //   status: Status,
+    //   socialtype: "local",
 
     if (Password === ConfirmPassword) {
       dispatch(editUserInfo(body, header)).then((res) => {
@@ -170,19 +179,19 @@ function UserInfo(props) {
               </div>
             </StyledTd>
           </tr>
-          <tr>
+          {/* <tr>
             <StyledTh>생일</StyledTh>
             <StyledTd>
               <div>
                 <StyledInput
-                  value={info.birth.split("T")[0]}
+                  value={Birth}
                   onChange={(e) => {
                     setBirth(e.currentTarget.value);
                   }}
                 ></StyledInput>
               </div>
             </StyledTd>
-          </tr>
+          </tr> */}
         </tbody>
       </InfoTable>
       <div style={{ textAlign: "center", padding: "20px 0" }}>

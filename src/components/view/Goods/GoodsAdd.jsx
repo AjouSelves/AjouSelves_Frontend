@@ -113,7 +113,7 @@ function GoodsAdd() {
             {ImageUrl === "" ? (
               <img alt="thumbnail" src={thumbnail} />
             ) : (
-              <img alt="error" src={ImageUrl} width="200px" height="200px" />
+              <img alt="error" src={ImageUrl} width="400px" height="400px" />
             )}
           </div>
           <input

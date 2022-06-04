@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { getUserInfo } from "../../_actions/user_actions";
+import { getUserInfo, deleteUser } from "../../_actions/user_actions";
 import UserInfo from "../../components/view/MyPageInfo/UserInfo";
 
 const StyledButton = styled.button`
@@ -15,6 +15,7 @@ const StyledButton = styled.button`
 
 function MyPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { state } = useLocation();
 
   const [userInfo, setUserInfo] = useState();
@@ -36,6 +37,22 @@ function MyPage() {
   });
 
   const [chkButton, setChkButton] = useState(1);
+
+  const deleteHandler = (e) => {
+    e.preventDefault();
+    dispatch(deleteUser(header)).then((res) => {
+      console.log(res);
+      if (res.payload.status === "success") {
+        alert("회원탈퇴 되었습니다!");
+        localStorage.clear();
+        navigate("/");
+        window.location.reload();
+      } else {
+        alert("error!");
+        navigate("/");
+      }
+    });
+  };
 
   return (
     <div>
@@ -72,12 +89,12 @@ function MyPage() {
 
           <StyledButton
             onClick={() => {
-              setChkButton(3);
+              alert("아직 결제 완료된 굿즈가 없습니다!");
             }}
           >
             결제 완료 굿즈
           </StyledButton>
-          <StyledButton>회원 탈퇴하기</StyledButton>
+          <StyledButton onClick={deleteHandler}>회원 탈퇴하기</StyledButton>
         </aside>
         {userInfo && chkButton === 1 && (
           <div style={{ width: "830px", float: "right" }}>
