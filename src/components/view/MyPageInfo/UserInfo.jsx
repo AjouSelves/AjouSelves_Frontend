@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+
+import { editUserInfo } from "../../../_actions/user_actions";
 
 const InfoTable = styled.table`
   border-top: 1px solid #d9d9d9;
@@ -49,18 +52,57 @@ const StyledButton = styled.button`
   height: 32px;
   font-size: 12px;
   line-height: 14px;
+  cursor: pointer;
 `;
 
 function UserInfo(props) {
+  const dispatch = useDispatch();
   const info = props.props;
   // console.log(props.props);
 
-  const [name, setName] = useState(info.name);
-  const [email] = useState(info.email);
-  const [password, setPassword] = useState();
+  const [Name, setName] = useState(info.name);
+  const [Email] = useState(info.email);
+  const [Nickname, setNickname] = useState(info.nickname);
+  const [Password, setPassword] = useState();
   const [ConfirmPassword, setConfirmPassword] = useState();
+  const [Birth, setBirth] = useState(info.birth.split("T")[0]);
 
-  const editInfo = () => {};
+  const editInfo = (e) => {
+    e.preventDefault();
+
+    const login_token = window.localStorage.getItem("login-token");
+
+    let header = {
+      headers: {
+        Authorization: login_token,
+      },
+    };
+
+    let body = {
+      email: Email,
+      password: Password,
+      name: Name,
+      phonenumber: info.phonenumber,
+      nickname: Nickname,
+      status: info.status,
+      socialtype: info.socialtype,
+      birth: Birth,
+      address: info.address,
+      sex: info.sex,
+      account: info.account,
+    };
+
+    if (Password === ConfirmPassword) {
+      dispatch(editUserInfo(body, header)).then((res) => {
+        console.log(res);
+        if (res.payload.status === "success") {
+          alert("회원정보 수정에 성공했습니다!");
+        }
+      });
+    } else {
+      alert("비밀번호확인이 올바르지 않습니다!");
+    }
+  };
 
   return (
     <div>
@@ -72,7 +114,7 @@ function UserInfo(props) {
             <StyledTd>
               <div>
                 <StyledInput
-                  value={name}
+                  value={Name}
                   onChange={(e) => {
                     setName(e.currentTarget.value);
                   }}
@@ -84,7 +126,7 @@ function UserInfo(props) {
             <StyledTh>이메일</StyledTh>
             <StyledTd>
               <div>
-                <StyledInput value={email} readOnly></StyledInput>
+                <StyledInput value={Email} readOnly></StyledInput>
               </div>
             </StyledTd>
           </tr>
@@ -93,6 +135,19 @@ function UserInfo(props) {
             <StyledTd>
               <div>
                 <StyledInput value={info.phonenumber} readOnly></StyledInput>
+              </div>
+            </StyledTd>
+          </tr>
+          <tr>
+            <StyledTh>닉네임</StyledTh>
+            <StyledTd>
+              <div>
+                <StyledInput
+                  value={Nickname}
+                  onChange={(e) => {
+                    setNickname(e.currentTarget.value);
+                  }}
+                ></StyledInput>
               </div>
             </StyledTd>
           </tr>
@@ -119,7 +174,12 @@ function UserInfo(props) {
             <StyledTh>생일</StyledTh>
             <StyledTd>
               <div>
-                <StyledInput value={info.birth.split("T")[0]}></StyledInput>
+                <StyledInput
+                  value={info.birth.split("T")[0]}
+                  onChange={(e) => {
+                    setBirth(e.currentTarget.value);
+                  }}
+                ></StyledInput>
               </div>
             </StyledTd>
           </tr>

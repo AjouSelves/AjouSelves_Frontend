@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -10,6 +10,7 @@ const StyledButton = styled.button`
   border: none;
   background: none;
   padding: 20px 10px;
+  cursor: pointer;
 `;
 
 function MyPage() {
@@ -20,16 +21,19 @@ function MyPage() {
 
   let header = {
     headers: {
-      "Content-Type": "multipart/form-data",
       Authorization: state,
     },
   };
 
-  dispatch(getUserInfo(header)).then((res) => {
-    setUserInfo(res.payload.data[0]);
+  useEffect(() => {
+    let isLoading = true;
+    dispatch(getUserInfo(header)).then((res) => {
+      if (isLoading) {
+        setUserInfo(res.payload.data[0]);
+      }
+    });
+    return () => (isLoading = false);
   });
-
-  // console.log(userInfo);
 
   const [chkButton, setChkButton] = useState(1);
 
