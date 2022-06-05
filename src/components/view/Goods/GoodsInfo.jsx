@@ -14,7 +14,6 @@ import {
 } from "../../../_actions/goods_actions";
 
 const Container = styled.div`
-  font-family: "S-CoreDream-9Black";
   font-weight: 200;
   font-size: 18px;
 `;
@@ -186,9 +185,7 @@ function GoodsInfo() {
             >
               🌟 {Goods.title}
             </h2>
-            <div style={{ padding: "10px" }}>
-              💰 1인당 굿즈 가격: {Goods.amount}
-            </div>
+            <div style={{ padding: "10px" }}>💰 굿즈 가격: {Goods.amount}</div>
             <hr />
             <div style={{ padding: "10px" }}>
               👨‍👩‍👦 최소 모집인원: {Goods.min_num}

@@ -119,13 +119,6 @@ function MyPage() {
         >
           <StyledButton
             onClick={() => {
-              setChkButton(1);
-            }}
-          >
-            회원정보수정
-          </StyledButton>
-          <StyledButton
-            onClick={() => {
               setChkButton(2);
             }}
           >
@@ -137,6 +130,13 @@ function MyPage() {
             }}
           >
             내가 제작한 굿즈
+          </StyledButton>
+          <StyledButton
+            onClick={() => {
+              setChkButton(1);
+            }}
+          >
+            회원정보수정
           </StyledButton>
           <StyledButton
             onClick={() => {

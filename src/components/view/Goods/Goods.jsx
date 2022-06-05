@@ -42,7 +42,7 @@ function Goods() {
   }, []);
 
   const percentage = (curr, min) => {
-    return ((curr / min) * 100).toFixed(1);
+    return ((curr / min) * 100).toFixed(0);
   };
 
   if (!GoodsList) return null;
@@ -51,7 +51,7 @@ function Goods() {
     <div>
       <GlobalFonts />
       <div style={{ fontSize: "32px", fontWeight: "500" }}>
-        모집중인 굿즈 리스트
+        🤝🏻 모집중인 굿즈 리스트
       </div>
       <Container>
         {GoodsList.map((GoodsList) => (
@@ -78,8 +78,17 @@ function Goods() {
                 height="300px"
               />
             )}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-              <div className="1">
+            <div
+              style={{
+                width: "300px",
+                display: "grid",
+                gridTemplateColumns: "1.5fr 1fr",
+                gridAutoRows: "minmax(25px, auto)",
+                justifyItems: "end",
+                alignItems: "end",
+              }}
+            >
+              <div className="1" style={{ justifySelf: "start" }}>
                 <div
                   style={{
                     fontSize: "18px",
@@ -92,16 +101,28 @@ function Goods() {
                 <div>{GoodsList.nickname}</div>
               </div>
               <div className="2">
-                <div>
-                  {GoodsList.cur_num} / {GoodsList.min_num}{" "}
-                  {percentage(GoodsList.cur_num, GoodsList.min_num)}%
+                <div
+                  style={{
+                    width: "100px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div style={{ fontSize: "16px" }}>
+                    {GoodsList.cur_num}명 / {GoodsList.min_num}명
+                  </div>
+                  <div style={{ color: "red" }}>
+                    {percentage(GoodsList.cur_num, GoodsList.min_num)}%
+                  </div>
                 </div>
               </div>
-              <div className="3">
+              <div className="3" style={{ justifySelf: "start" }}>
                 <div>{GoodsList.created_at.split("T")[0]}</div>
               </div>
               <div className="4">
-                <div>{GoodsList.amount}원</div>
+                <div style={{ fontSize: "16px", color: "red" }}>
+                  {GoodsList.amount}원
+                </div>
               </div>
             </div>
           </Card>

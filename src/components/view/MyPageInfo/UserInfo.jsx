@@ -40,7 +40,10 @@ const StyledInput = styled.input`
   height: 32px;
   box-sizing: border-box;
   padding: 2px 8px;
-  border-radius: 2px;
+
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
 `;
 
 const StyledSelect = styled.select`
@@ -131,13 +134,15 @@ function UserInfo(props) {
                   onChange={(e) => {
                     setPassword(e.currentTarget.value);
                   }}
+                  placeholder="비밀번호"
                 ></StyledInput>
               </div>
-              <div>
+              <div style={{ marginTop: "15px" }}>
                 <StyledInput
                   onChange={(e) => {
                     setConfirmPassword(e.currentTarget.value);
                   }}
+                  placeholder="비밀번호 확인"
                 ></StyledInput>
               </div>
             </StyledTd>
