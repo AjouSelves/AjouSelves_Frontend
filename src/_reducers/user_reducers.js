@@ -6,6 +6,7 @@ import {
   EDIT_USER_INFO,
   GET_JOIN_TITLE,
   PASSWORD_VERIFY,
+  EMAIL_VERIFY,
 } from "../_actions/types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -32,6 +33,8 @@ export default function (state = {}, action) {
     case PASSWORD_VERIFY:
       return { ...state, passVeri: action.payload };
 
+    case EMAIL_VERIFY:
+      return { ...state, emailVeri: action.payload };
     default:
       return state;
   }

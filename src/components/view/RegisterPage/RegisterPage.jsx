@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { registerUser } from "../../../_actions/user_actions";
+import { registerUser, emailVerify } from "../../../_actions/user_actions";
 
 const StyledForm = styled.form`
   display: flex;
@@ -18,6 +18,8 @@ const StyledInput = styled.input`
   width: 100%;
   height: 48px;
   margin-top: 10px;
+  border: none;
+  border-bottom: 1px solid black;
 `;
 
 const StyledSelect = styled.select`
@@ -27,7 +29,7 @@ const StyledSelect = styled.select`
 `;
 
 const InputBox = styled.div`
-  margin-top: 20px;
+  margin-top: 40px;
 `;
 
 const StyledButton = styled.button`
@@ -42,6 +44,11 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
+const StyledLabel = styled.label`
+  font-weight: 700;
+  font-size: 18px;
+`;
+
 function RegisterPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,7 +60,12 @@ function RegisterPage() {
   const [Nickname, setNickname] = useState("");
   const [Status, setStatus] = useState("");
   const [Name, setName] = useState("");
-  const [Address, setAddress] = useState("");
+
+  const [VerifyNum, setVerifyNum] = useState();
+  const [EmailNum, setEmailNum] = useState();
+  const [ChkVerify, setChkVerify] = useState(false);
+  const [Completed, setCompleted] = useState(false);
+  const [isChked, setIsChked] = useState(false);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -70,20 +82,53 @@ function RegisterPage() {
 
     console.log("body: ", body);
 
-    if (Password !== ConfirmPassword) {
-      return alert("비밀번호가 올바르지 않습니다!");
+    if (!isChked) alert("이메일 인증을 진행해주세요");
+    else {
+      if (Password !== ConfirmPassword) {
+        return alert("비밀번호가 올바르지 않습니다!");
+      } else {
+        dispatch(registerUser(body)).then((res) => {
+          console.log(res);
+          if (res.payload) {
+            alert(
+              "회원가입이 완료되었습니다.\n첫 굿즈인 스티커 수령은 파란학기 굿즈바이어스 부스 또는 도서관카페에서 수령하실 수 있습니다!"
+            );
+            navigate("/");
+          } else {
+            alert("error");
+          }
+        });
+      }
+    }
+  };
+
+  const emailVeriHandler = (e) => {
+    e.preventDefault();
+    let body = { email: Email };
+    dispatch(emailVerify(body)).then((res) => {
+      if (res.payload.status === "fail") {
+        alert("중복된 이메일입니다");
+      } else {
+        console.log(res.payload.number);
+        setVerifyNum(res.payload.number);
+        setChkVerify(true);
+      }
+    });
+  };
+
+  const emailHandler = (e) => {
+    e.preventDefault();
+
+    console.log(VerifyNum);
+    console.log(EmailNum);
+
+    if (VerifyNum === parseInt(EmailNum)) {
+      alert("인증이 완료되었습니다!");
+      setIsChked(true);
+      setChkVerify(false);
+      setCompleted(true);
     } else {
-      dispatch(registerUser(body)).then((res) => {
-        console.log(res);
-        if (res.payload) {
-          alert(
-            "회원가입이 완료되었습니다.\n첫 굿즈인 스티커 수령은 파란학기 굿즈바이어스 부스 또는 도서관카페에서 수령하실 수 있습니다!"
-          );
-          navigate("/");
-        } else {
-          alert("error");
-        }
-      });
+      alert("인증번호가 올바르지 않습니다");
     }
   };
 
@@ -91,9 +136,9 @@ function RegisterPage() {
     <div style={{ width: "384px", margin: "0 auto" }}>
       <StyledForm onSubmit={onSubmitHandler}>
         <InputBox>
-          <label>
+          <StyledLabel>
             <strong className="red">*</strong> 이메일
-          </label>
+          </StyledLabel>
           <StyledInput
             type="email"
             value={Email}
@@ -103,11 +148,27 @@ function RegisterPage() {
             placeholder="이메일을 입력해주세요."
             required
           />
+          {!Completed && (
+            <StyledButton onClick={emailVeriHandler}>이메일 인증</StyledButton>
+          )}
         </InputBox>
+        {ChkVerify && (
+          <InputBox>
+            <StyledLabel>인증번호입력</StyledLabel>
+            <StyledInput
+              placeholder="인증번호 6자리를 입력해주세요"
+              onChange={(e) => {
+                setEmailNum(e.currentTarget.value);
+              }}
+            ></StyledInput>
+            <StyledButton onClick={emailHandler}>인증번호 입력</StyledButton>
+          </InputBox>
+        )}
+        {Completed && <div>✅ 이메일 인증이 완료되었습니다.</div>}
         <InputBox>
-          <label>
+          <StyledLabel>
             <strong className="red">*</strong> 비밀번호
-          </label>
+          </StyledLabel>
           <StyledInput
             type="password"
             value={Password}
@@ -115,7 +176,6 @@ function RegisterPage() {
               setPassword(e.currentTarget.value);
             }}
             placeholder="비밀번호"
-            required
           />
           <StyledInput
             type="password"
@@ -124,13 +184,12 @@ function RegisterPage() {
               setConfirmPassword(e.currentTarget.value);
             }}
             placeholder="비밀번호 확인"
-            required
           />
         </InputBox>
         <InputBox>
-          <label>
+          <StyledLabel>
             <strong className="red">*</strong> 이름
-          </label>
+          </StyledLabel>
           <StyledInput
             type="text"
             value={Name}
@@ -138,13 +197,12 @@ function RegisterPage() {
               setName(e.currentTarget.value);
             }}
             placeholder="이름"
-            required
           />
         </InputBox>
         <InputBox>
-          <label>
+          <StyledLabel>
             <strong className="red">*</strong> 전화번호
-          </label>
+          </StyledLabel>
           <StyledInput
             type="text"
             value={Phonenumber}
@@ -152,13 +210,12 @@ function RegisterPage() {
               setPhonenumber(e.currentTarget.value);
             }}
             placeholder="010-1234-5678"
-            required
           />
         </InputBox>
         <InputBox>
-          <label>
+          <StyledLabel>
             <strong className="red">*</strong> 닉네임
-          </label>
+          </StyledLabel>
           <StyledInput
             type="text"
             value={Nickname}
@@ -166,7 +223,6 @@ function RegisterPage() {
               setNickname(e.currentTarget.value);
             }}
             placeholder="닉네임"
-            required
           />
         </InputBox>
         {/* <InputBox>
@@ -187,13 +243,13 @@ function RegisterPage() {
           </StyledSelect>
         </InputBox> */}
         <InputBox>
-          <label
+          <StyledLabel
             onChange={(e) => {
               setStatus(e.target.value);
             }}
           >
             <strong className="red">*</strong> 학적상태 선택
-          </label>
+          </StyledLabel>
           <StyledSelect
             onChange={(e) => {
               setStatus(e.target.value);

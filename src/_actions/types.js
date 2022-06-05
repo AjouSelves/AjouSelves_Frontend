@@ -15,6 +15,7 @@ export const DELETE_USER = "delete_user";
 export const EDIT_USER_INFO = "edit_user_info";
 export const GET_JOIN_TITLE = "get_join_title";
 export const PASSWORD_VERIFY = "password_verify";
+export const EMAIL_VERIFY = "email_verify";
 
 export const PROJ_ADD = "proj_add";
 export const PROJ_ADD_PHOTO = "proj_add_photo";

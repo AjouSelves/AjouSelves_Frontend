@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { PASSWORD_VERIFY, SERVER_URL_API } from "./types";
+import { EMAIL_VERIFY, PASSWORD_VERIFY, SERVER_URL_API } from "./types";
 import {
   LOGIN_USER,
   REGISTER_USER,
@@ -65,4 +65,12 @@ export function passwordVerify(body, header) {
     .then((response) => response.data);
 
   return { type: PASSWORD_VERIFY, payload: request };
+}
+
+export function emailVerify(body) {
+  const request = axios
+    .post(`${SERVER_URL_API}/auth/email`, body)
+    .then((response) => response.data);
+
+  return { type: EMAIL_VERIFY, payload: request };
 }
