@@ -12,8 +12,8 @@ import {
 import UserInfo from "../../components/view/MyPageInfo/UserInfo";
 
 const StyledButton = styled.button`
+  width: 100%;
   border: none;
-  background: none;
   padding: 20px 10px;
   cursor: pointer;
 `;
@@ -109,7 +109,7 @@ function MyPage() {
           paddingTop: "36px",
         }}
       >
-        <aside
+        <div
           style={{
             width: "150px",
             marginRight: "0",
@@ -118,44 +118,51 @@ function MyPage() {
           }}
         >
           <StyledButton
+            className={chkButton === 1 ? "active" : "unactive"}
             onClick={() => {
-              setChkButton(2);
+              setChkButton(1);
             }}
           >
             내가 참여한 굿즈
           </StyledButton>
           <StyledButton
+            className={chkButton === 2 ? "active" : "unactive"}
             onClick={() => {
-              setChkButton(3);
+              setChkButton(2);
             }}
           >
             내가 제작한 굿즈
           </StyledButton>
           <StyledButton
+            className={chkButton === 3 ? "active" : "unactive"}
             onClick={() => {
-              setChkButton(1);
+              setChkButton(3);
             }}
           >
             회원정보수정
           </StyledButton>
           <StyledButton
+            className={chkButton === 4 ? "active" : "unactive"}
             onClick={() => {
+              setChkButton(4);
               alert("아직 결제 완료된 굿즈가 없습니다!");
             }}
           >
             결제 완료 굿즈
           </StyledButton>
           <StyledButton
+            className={chkButton === 5 ? "active" : "unactive"}
             onClick={() => {
-              setChkButton(4);
+              setChkButton(5);
             }}
           >
             회원 탈퇴하기
           </StyledButton>
           {/* onClick={deleteHandler} */}
-        </aside>
-        {userInfo && chkButton === 0 && <div>main</div>}
-        {userInfo && chkButton === 1 && !chkPassword && (
+        </div>
+        {userInfo && chkButton === 1 && <div>main</div>}
+        {userInfo && chkButton === 2 && <div>user info is here 2</div>}
+        {userInfo && chkButton === 3 && !chkPassword && (
           <div style={{ width: "830px", float: "right" }}>
             <div style={{ textAlign: "center", marginTop: "60px" }}>
               <form>
@@ -173,14 +180,13 @@ function MyPage() {
             </div>
           </div>
         )}
-        {userInfo && chkButton === 1 && chkPassword && (
+        {userInfo && chkButton === 3 && chkPassword && (
           <div style={{ width: "830px", float: "right" }}>
             <UserInfo props={userInfo} />
           </div>
         )}
-        {userInfo && chkButton === 2 && <div>user info is here 2</div>}
-        {userInfo && chkButton === 3 && <div>user info is here 3</div>}
-        {userInfo && chkButton === 4 && (
+        {userInfo && chkButton === 4 && <div>결제완료굿즈</div>}
+        {userInfo && chkButton === 5 && (
           <div style={{ width: "830px", float: "right" }}>
             <div style={{ textAlign: "center", marginTop: "60px" }}>
               <form>

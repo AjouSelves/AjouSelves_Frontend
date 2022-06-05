@@ -1,1 +1,10 @@
 .red{color: red}
+
+.active{
+    color: white; 
+    background: #24272b;
+}
+
+.unactive{
+    background: #efefef;
+}
