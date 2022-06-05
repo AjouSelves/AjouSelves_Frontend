@@ -63,6 +63,7 @@ function GoodsInfo() {
   const GoodsList = useSelector((state) => state.goods.getAll);
 
   const [PhoneNumber, setPhoneNumber] = useState("");
+  const [CurNum, setCurNum] = useState();
 
   const [chkPoster, setChkPoster] = useState(0);
   const [chkJoined, setChkJoined] = useState(0);
@@ -85,8 +86,9 @@ function GoodsInfo() {
       setPhoneNumber(res.payload[0].phonenumber);
       setChkPoster(res.payload[1].is_poster);
       setChkJoined(res.payload[2].is_joined);
+      setCurNum(res.payload[0].cur_num);
     });
-  }, []);
+  }, [Goods.cur_num]);
 
   const login_token = window.localStorage.getItem("login-token");
   let header = {
@@ -191,7 +193,7 @@ function GoodsInfo() {
               👨‍👩‍👦 최소 모집인원: {Goods.min_num}
             </div>
             <div style={{ padding: "10px" }}>
-              👨‍👩‍👦 현재 참여인원: {Goods.cur_num}
+              👨‍👩‍👦 현재 참여인원: {CurNum}
               <div
                 style={{
                   fontSize: "12px",
@@ -201,7 +203,7 @@ function GoodsInfo() {
                   verticalAlign: "middle",
                 }}
               >
-                {percentage(Goods.min_num, Goods.cur_num)} 달성
+                {percentage(Goods.min_num, CurNum)} 달성
               </div>
             </div>
             <hr />
@@ -213,7 +215,7 @@ function GoodsInfo() {
               </StyledButton>
             ) : (
               <StyledButton style={{ width: "100%" }} onClick={onLeaveHandler}>
-                참여 취소하기
+                펀딩 참여 취소하기 😢
               </StyledButton>
             )}
           </div>
