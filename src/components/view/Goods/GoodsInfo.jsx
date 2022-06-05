@@ -150,7 +150,7 @@ function GoodsInfo() {
         </Body>
         <div style={{ marginTop: "150px" }}>
           <h2>굿즈 소개</h2>
-          <div>{Goods.explained}</div>
+          <div style={{ whiteSpace: "pre-wrap" }}>{Goods.explained}</div>
         </div>
       </Container>
     </GoodsListBlock>
