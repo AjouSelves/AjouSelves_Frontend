@@ -43,9 +43,14 @@ const StyledInput = styled.input`
   border-radius: 2px;
 `;
 
+const StyledSelect = styled.select`
+  height: 32px;
+  margin-top: 10px;
+`;
+
 const StyledButton = styled.button`
   border: none;
-  background: #a0a0a0;
+  background: #24272b;
   color: white;
   width: 140px;
   padding: 8px 15px;
@@ -65,7 +70,9 @@ function UserInfo(props) {
   const [Nickname, setNickname] = useState(info.nickname);
   const [Password, setPassword] = useState();
   const [ConfirmPassword, setConfirmPassword] = useState();
-  const [Birth, setBirth] = useState(info.birth);
+  const [Status, setStatus] = useState(info.status);
+  const [Bank, setBank] = useState("");
+  const [Account, setAccount] = useState("");
 
   const editInfo = (e) => {
     e.preventDefault();
@@ -84,22 +91,12 @@ function UserInfo(props) {
       name: Name,
       phonenumber: info.phonenumber,
       nickname: Nickname,
-      status: info.status,
+      status: Status,
       socialtype: "local",
-      birth: "1999-09-13",
       account: "",
-      profilelink: "",
     };
 
     console.log(body);
-
-    // email: Email,
-    //   password: Password,
-    //   name: Name,
-    //   phonenumber: Phonenumber,
-    //   nickname: Nickname,
-    //   status: Status,
-    //   socialtype: "local",
 
     if (Password === ConfirmPassword) {
       dispatch(editUserInfo(body, header)).then((res) => {
@@ -119,44 +116,10 @@ function UserInfo(props) {
       <InfoTable>
         <tbody>
           <tr>
-            <StyledTh>이름</StyledTh>
-            <StyledTd>
-              <div>
-                <StyledInput
-                  value={Name}
-                  onChange={(e) => {
-                    setName(e.currentTarget.value);
-                  }}
-                ></StyledInput>
-              </div>
-            </StyledTd>
-          </tr>
-          <tr>
             <StyledTh>이메일</StyledTh>
             <StyledTd>
               <div>
                 <StyledInput value={Email} readOnly></StyledInput>
-              </div>
-            </StyledTd>
-          </tr>
-          <tr>
-            <StyledTh>전화번호</StyledTh>
-            <StyledTd>
-              <div>
-                <StyledInput value={info.phonenumber} readOnly></StyledInput>
-              </div>
-            </StyledTd>
-          </tr>
-          <tr>
-            <StyledTh>닉네임</StyledTh>
-            <StyledTd>
-              <div>
-                <StyledInput
-                  value={Nickname}
-                  onChange={(e) => {
-                    setNickname(e.currentTarget.value);
-                  }}
-                ></StyledInput>
               </div>
             </StyledTd>
           </tr>
@@ -179,19 +142,74 @@ function UserInfo(props) {
               </div>
             </StyledTd>
           </tr>
-          {/* <tr>
-            <StyledTh>생일</StyledTh>
+          <tr>
+            <StyledTh>이름</StyledTh>
             <StyledTd>
               <div>
                 <StyledInput
-                  value={Birth}
+                  value={Name}
                   onChange={(e) => {
-                    setBirth(e.currentTarget.value);
+                    setName(e.currentTarget.value);
                   }}
                 ></StyledInput>
               </div>
             </StyledTd>
-          </tr> */}
+          </tr>
+
+          <tr>
+            <StyledTh>전화번호</StyledTh>
+            <StyledTd>
+              <div>
+                <StyledInput value={info.phonenumber} readOnly></StyledInput>
+              </div>
+            </StyledTd>
+          </tr>
+          <tr>
+            <StyledTh>닉네임</StyledTh>
+            <StyledTd>
+              <div>
+                <StyledInput
+                  value={Nickname}
+                  onChange={(e) => {
+                    setNickname(e.currentTarget.value);
+                  }}
+                ></StyledInput>
+              </div>
+            </StyledTd>
+          </tr>
+          <tr>
+            <StyledTh>학적상태</StyledTh>
+            <StyledTd>
+              <div>
+                <StyledSelect
+                  onChange={(e) => {
+                    setStatus(e.target.value);
+                  }}
+                >
+                  <option value="none">=======선택=======</option>
+                  <option value="재학생">재학생</option>
+                  <option value="졸업생">졸업생</option>
+                  <option value="외부인">외부인</option>
+                </StyledSelect>
+              </div>
+            </StyledTd>
+          </tr>
+          <tr>
+            <StyledTh>주소</StyledTh>
+            <StyledTd>
+              <div>
+                <StyledInput onChange={(e) => {}}></StyledInput>
+              </div>
+            </StyledTd>
+          </tr>
+          <tr>
+            <StyledTh>계좌번호</StyledTh>
+            <StyledTd>
+              <div>
+                <StyledInput onChange={(e) => {}}></StyledInput>
+              </div>
+            </StyledTd>
+          </tr>
         </tbody>
       </InfoTable>
       <div style={{ textAlign: "center", padding: "20px 0" }}>

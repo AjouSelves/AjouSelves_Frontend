@@ -49,12 +49,12 @@ function Footer() {
         <div>
           <IoCall /> 전화번호
           <br />
-          010-1234-5678
+          010-4634-1277
         </div>
         <div>
           <IoMail /> 이메일
           <br />
-          ajouselves@ajou.ac.kr
+          ajouselves@naver.com
         </div>
       </StyledInfo>
       <StyledIcon>

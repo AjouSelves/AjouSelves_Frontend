@@ -83,7 +83,8 @@ function Header() {
         <StyledLi>
           <StyledP
             onClick={() => {
-              navigate("/goods/add");
+              if (!Logined) alert("로그인 후 진행해주세요!");
+              else navigate("/goods/add");
             }}
           >
             판매하기

@@ -30,6 +30,18 @@ const InputBox = styled.div`
   margin-top: 20px;
 `;
 
+const StyledButton = styled.button`
+  border: none;
+  background: #24272b;
+  color: white;
+  margin-top: 30px;
+  padding: 8px 15px;
+  height: 32px;
+  font-size: 12px;
+  line-height: 14px;
+  cursor: pointer;
+`;
+
 function RegisterPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,11 +53,7 @@ function RegisterPage() {
   const [Nickname, setNickname] = useState("");
   const [Status, setStatus] = useState("");
   const [Name, setName] = useState("");
-  const [Birth, setBirth] = useState("");
-  const [Sex, setSex] = useState("");
   const [Address, setAddress] = useState("");
-  const [Bank, setBank] = useState("");
-  const [Account, setAccount] = useState("");
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -68,7 +76,9 @@ function RegisterPage() {
       dispatch(registerUser(body)).then((res) => {
         console.log(res);
         if (res.payload) {
-          alert("회원가입 완료!");
+          alert(
+            "회원가입이 완료되었습니다.\n첫 굿즈인 스티커 수령은 파란학기 굿즈바이어스 부스 또는 도서관카페에서 수령하실 수 있습니다!"
+          );
           navigate("/");
         } else {
           alert("error");
@@ -189,6 +199,7 @@ function RegisterPage() {
               setStatus(e.target.value);
             }}
           >
+            <option value="none">=======선택=======</option>
             <option value="재학생">재학생</option>
             <option value="졸업생">졸업생</option>
             <option value="외부인">외부인</option>
@@ -232,7 +243,7 @@ function RegisterPage() {
             />
           </div>
         </InputBox> */}
-        <button type="submit">회원가입하기</button>
+        <StyledButton type="submit">회원가입하기</StyledButton>
       </StyledForm>
     </div>
   );

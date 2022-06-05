@@ -32,6 +32,22 @@ const GoodsListBlock = styled.div`
   }
 `;
 
+const StyledButton = styled.button`
+  border: none;
+  background: #24272b;
+  color: white;
+  margin-top: 30px;
+  padding: 8px 15px;
+  height: 32px;
+  font-size: 15px;
+  line-height: 14px;
+  cursor: pointer;
+`;
+
+function percentage(min, cur) {
+  return ((cur / min) * 100).toFixed(1) + "%";
+}
+
 // 특정 굿즈 정보 보여주는 component
 
 function GoodsInfo() {
@@ -114,8 +130,13 @@ function GoodsInfo() {
               />
             )}
             <div>
-              <button onClick={onDeleteHandler}>굿즈 삭제하기</button>
-              <button onClick={onEditHandler}>굿즈 수정하기</button>
+              <StyledButton
+                style={{ background: "red", marginRight: "10px" }}
+                onClick={onDeleteHandler}
+              >
+                굿즈 삭제하기
+              </StyledButton>
+              <StyledButton onClick={onEditHandler}>굿즈 수정하기</StyledButton>
             </div>
           </div>
 
@@ -126,8 +147,6 @@ function GoodsInfo() {
               {Goods.title}
             </h2>
 
-            <div style={{ padding: "10px" }}>상품 구성: </div>
-
             <div style={{ padding: "10px" }}>목표 금액: </div>
             <hr />
 
@@ -137,15 +156,25 @@ function GoodsInfo() {
 
             <div style={{ padding: "10px" }}>
               현재 참여인원: {Goods.cur_num}
+              <div
+                style={{
+                  fontSize: "12px",
+                  float: "right",
+                  color: "red",
+                  fontStyle: "normal",
+                  verticalAlign: "middle",
+                }}
+              >
+                {percentage(Goods.min_num, Goods.cur_num)} 달성
+              </div>
             </div>
 
-            <div style={{ padding: "10px" }}>발송 예정: </div>
             <hr />
 
             <div style={{ padding: "10px" }}>문의 연락처: </div>
-            <button style={{ width: "100%" }} onClick={onJoinHandler}>
-              펀딩 참여하러 가기
-            </button>
+            <StyledButton style={{ width: "100%" }} onClick={onJoinHandler}>
+              펀딩 참여하러 가기 😃
+            </StyledButton>
           </div>
         </Body>
         <div style={{ marginTop: "150px" }}>

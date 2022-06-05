@@ -20,6 +20,18 @@ const StyledInput = styled.input`
   margin-top: 10px;
 `;
 
+const StyledButton = styled.button`
+  border: none;
+  background: #24272b;
+  color: white;
+  margin-top: 10px;
+  padding: 8px 15px;
+  height: 32px;
+  font-size: 14px;
+  line-height: 14px;
+  cursor: pointer;
+`;
+
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -64,15 +76,20 @@ function LoginPage() {
           }}
           placeholder="비밀번호"
         ></StyledInput>
-        <div>
-          <button type="submit">로그인</button>
-          <button
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <StyledButton type="submit">로그인</StyledButton>
+          <StyledButton
             onClick={() => {
               navigate("/register");
             }}
           >
             회원가입하기
-          </button>
+          </StyledButton>
         </div>
       </StyledForm>
     </div>
