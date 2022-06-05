@@ -6,7 +6,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import GlobalFonts from "../../../font/font";
 import thumbnail from "../../../images/thumbnail.jpeg";
 import { SERVER_URL } from "../../../_actions/types";
-import { projDelete, projJoin } from "../../../_actions/goods_actions";
+import {
+  projDelete,
+  projJoin,
+  projGetById,
+} from "../../../_actions/goods_actions";
 
 const Container = styled.div`
   font-family: "S-CoreDream-9Black";
@@ -58,9 +62,26 @@ function GoodsInfo() {
   const [projid] = useState(state);
   const GoodsList = useSelector((state) => state.goods.getAll);
 
+  const [chkPoster, setChkPoster] = useState(0);
+
   const Goods = useMemo(() => {
     return GoodsList.find((f) => f.projid === projid);
   }, [GoodsList]);
+
+  // useEffect(dispatch(projGetById(projid, header)));
+  useEffect(() => {
+    const login_token = window.localStorage.getItem("login-token");
+    let header = {
+      headers: {
+        Authorization: login_token,
+      },
+    };
+
+    dispatch(projGetById(projid, header)).then((res) => {
+      console.log(res.payload[1].is_poster);
+      setChkPoster(res.payload[1].is_poster);
+    });
+  }, []);
 
   const login_token = window.localStorage.getItem("login-token");
   let header = {
@@ -129,17 +150,20 @@ function GoodsInfo() {
                 height="400px"
               />
             )}
-            <div>
-              <StyledButton
-                style={{ background: "red", marginRight: "10px" }}
-                onClick={onDeleteHandler}
-              >
-                굿즈 삭제하기
-              </StyledButton>
-              <StyledButton onClick={onEditHandler}>굿즈 수정하기</StyledButton>
-            </div>
+            {chkPoster === 1 && (
+              <div>
+                <StyledButton
+                  style={{ background: "red", marginRight: "10px" }}
+                  onClick={onDeleteHandler}
+                >
+                  굿즈 삭제하기
+                </StyledButton>
+                <StyledButton onClick={onEditHandler}>
+                  굿즈 수정하기
+                </StyledButton>
+              </div>
+            )}
           </div>
-
           <div>
             <h2
               style={{ borderBottom: "2px solid black", paddingBottom: "20px" }}

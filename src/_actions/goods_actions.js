@@ -61,8 +61,10 @@ export function projGetAll() {
   return { type: PROJ_GET_ALL, payload: req };
 }
 
-export function projGetById(id) {
-  const req = axios.get(`${SERVER_URL_API}/proj/${id}`).then((res) => res.data);
+export function projGetById(id, header) {
+  const req = axios
+    .get(`${SERVER_URL_API}/proj/${id}`, header)
+    .then((res) => res.data);
   return { type: PROJ_GET_BY_ID, payload: req };
 }
 

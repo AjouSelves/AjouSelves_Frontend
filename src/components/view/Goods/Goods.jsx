@@ -29,6 +29,8 @@ function Goods() {
 
   const [GoodsList, setGoodsList] = useState("");
 
+  const login_token = window.localStorage.getItem("login-token");
+
   useEffect(() => {
     dispatch(projGetAll()).then((res) => {
       setGoodsList(res.payload);
@@ -44,7 +46,8 @@ function Goods() {
           key={GoodsList.projid}
           onClick={() => {
             console.log(GoodsList.projid);
-            navigate("/goods/info", { state: GoodsList.projid });
+            if (login_token === null) alert("로그인 후 진행해주세요!");
+            else navigate("/goods/info", { state: GoodsList.projid });
           }}
         >
           {GoodsList.url ? (
