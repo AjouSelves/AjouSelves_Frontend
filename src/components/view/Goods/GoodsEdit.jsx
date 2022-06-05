@@ -10,8 +10,7 @@ import { SERVER_URL } from "../../../_actions/types";
 // 굿즈 등록 component
 
 const StyledForm = styled.form`
-  font-family: "S-CoreDream-9Black";
-  font-weight: 200;
+  font-weight: 700;
   font-size: 18px;
 
   display: flex;
@@ -19,6 +18,40 @@ const StyledForm = styled.form`
   justify-content: center;
 
   padding: 50px 200px;
+`;
+
+const InputBox = styled.div`
+  margin-top: 20px;
+`;
+
+const StyledInput = styled.input`
+  width: 80%;
+  height: 48px;
+  margin-top: 10px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+`;
+
+const StyledInputSmall = styled.input`
+  width: 25%;
+  height: 48px;
+
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+`;
+
+const StyledButton = styled.button`
+  border: none;
+  background: #24272b;
+  color: white;
+  margin-top: 30px;
+  padding: 8px 15px;
+  height: 32px;
+  font-size: 12px;
+  line-height: 14px;
+  cursor: pointer;
 `;
 
 function GoodsEdit() {
@@ -30,11 +63,11 @@ function GoodsEdit() {
 
   const [Title, setTitle] = useState(state.title);
   const [Explained, setExplained] = useState(state.explained);
-  const [Image, setImage] = useState(state.url);
-  const [ImageUrl, setImageUrl] = useState("");
+  const [Files, setFiles] = useState();
+  const [ImageUrl, setImageUrl] = useState(state.url);
   const [Minimum, setMinimum] = useState(state.min_num);
   const [Category, setCategory] = useState("");
-  const [Files, setFiles] = useState();
+  const [Amount, setAmount] = useState(state.amount);
 
   const [ChkChange, setChkChange] = useState(false);
 
@@ -64,9 +97,10 @@ function GoodsEdit() {
         min_num: Minimum,
         category: Category,
         required: "",
+        amount: Amount,
       };
       dispatch(projEdit(state.projid, body, header)).then((res) => {
-        if (res.payload.status === "success") {
+        if (res.payload.text === "글 수정이 완료되었습니다.") {
           alert("수정이 완료되었습니다.");
           navigate("/goods");
         } else {
@@ -89,6 +123,7 @@ function GoodsEdit() {
       formData.append("min_num", Minimum);
       formData.append("category", Category);
       formData.append("required", "");
+      formData.append("amount", Amount);
 
       for (var i = 0; i < Files.length; i++) {
         formData.append("photo", Files[i]);
@@ -106,58 +141,31 @@ function GoodsEdit() {
         }
       });
     }
-
-    // formData.append("title", Title);
-    // formData.append("explained", Explained);
-    // //formData.append("photo", Image);
-    // formData.append("min_num", Minimum);
-    // formData.append("category", Category);
-    // formData.append("required", "");
-
-    // for (var i = 0; i < Files.length; i++) {
-    //   formData.append("photo", Files[i]);
-    // }
-
-    // let header = {
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //     Authorization: login_token,
-    //   },
-    // };
-
-    // dispatch(projEdit(state.projid, formData, header)).then((res) => {
-    //   if (res.payload.text === "success") {
-    //     alert("수정 완료");
-    //     navigate("/goods");
-    //   } else {
-    //     alert("글 작성자만 수정할 수 있습니다.");
-    //     navigate("/goods");
-    //   }
-    // });
   };
   return (
-    <div>
+    <div style={{ width: "1200px", margin: "0 auto" }}>
       <GlobalFonts />
       <StyledForm onSubmit={onSubmitHandler}>
-        <p>제목을 입력해 주시기 바랍니다.</p>
-        <input
-          type="text"
-          onChange={(e) => {
-            setTitle(e.currentTarget.value);
-          }}
-          style={{ width: "80%", height: 30 }}
-          value={Title}
-        />
+        <InputBox>
+          🌟 굿즈의 이름을 지어주세요
+          <StyledInput
+            type="text"
+            onChange={(e) => {
+              setTitle(e.currentTarget.value);
+            }}
+            value={Title}
+          />
+        </InputBox>
         <br />
-        <div>
-          <p>썸네일을 업로드 해주시기 바랍니다.</p>
-          <div>
+        <InputBox>
+          썸네일을 업로드 해주시기 바랍니다.
+          <div style={{ marginTop: "10px" }}>
             {ChkChange || Image === null ? (
               <img alt="no_image" src={ImageUrl} width="300px" height="300px" />
             ) : (
               <img
                 alt="sample"
-                src={`${SERVER_URL}${Image}`}
+                src={`${SERVER_URL}${ImageUrl}`}
                 width="300px"
                 height="300px"
               />
@@ -169,52 +177,75 @@ function GoodsEdit() {
             accept="image/*"
             onChange={(e) => {
               e.preventDefault();
-              setImage(e.target.files[0]);
+              setImageUrl(e.target.files[0]);
               const files = e.target.files;
               setFiles(files);
               setImageUrl(URL.createObjectURL(e.target.files[0]));
               setChkChange(true);
             }}
           />
-        </div>
+        </InputBox>
         <br />
-        <div>
-          <p>굿즈를 자유롭게 설명해 주시기 바랍니다.</p>
+        <InputBox>
+          📝 굿즈에 대한 설명을 적어주세요
           <textarea
             onChange={(e) => {
               setExplained(e.currentTarget.value);
             }}
-            style={{ width: "80%", height: "300px", resize: "none" }}
+            style={{
+              width: "100%",
+              height: "300px",
+              resize: "none",
+              marginTop: "10px",
+            }}
             value={Explained}
           ></textarea>
-        </div>
+        </InputBox>
         <br />
-        <div>
-          <p>최소요구인원을 설정 해주시기 바랍니다.</p>
-          <input
+        <InputBox>
+          👨‍👩‍👦 최소요구인원을 설정 해주시기 바랍니다.
+          <br />
+          <StyledInputSmall
             type="number"
             onChange={(e) => {
               setMinimum(e.currentTarget.value);
             }}
             value={Minimum}
           />
-        </div>
+        </InputBox>
         <br />
-        <div>
-          <p>카테고리</p>
-          <input
+        <InputBox>
+          📚 카테고리
+          <br />
+          <StyledInputSmall
             type="text"
             onChange={(e) => {
               setCategory(e.currentTarget.value);
             }}
           />
-        </div>
-        <button
+        </InputBox>
+        <InputBox>
+          💰 가격 설정
+          <br />
+          <StyledInputSmall
+            type="number"
+            onChange={(e) => {
+              setAmount(e.currentTarget.value);
+            }}
+            value={Amount}
+          />
+        </InputBox>
+        <StyledButton
           type="submit"
-          style={{ width: "300px", height: "30px", alignSelf: "center" }}
+          style={{
+            width: "100%",
+            height: "30px",
+            alignSelf: "center",
+            marginTop: "50px",
+          }}
         >
           굿즈 수정하기
-        </button>
+        </StyledButton>
       </StyledForm>
     </div>
   );

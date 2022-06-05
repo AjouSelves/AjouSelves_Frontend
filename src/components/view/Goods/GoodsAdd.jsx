@@ -134,14 +134,16 @@ function GoodsAdd() {
     <div style={{ width: "1200px", margin: "0 auto" }}>
       <GlobalFonts />
       <StyledForm onSubmit={onSubmitHandler}>
-        🌟 굿즈의 이름을 지어주세요
-        <StyledInput
-          type="text"
-          onChange={(e) => {
-            setTitle(e.currentTarget.value);
-          }}
-          placeholder="ex) 굿즈바이어스"
-        />
+        <InputBox>
+          🌟 굿즈의 이름을 지어주세요
+          <StyledInput
+            type="text"
+            onChange={(e) => {
+              setTitle(e.currentTarget.value);
+            }}
+            placeholder="ex) 굿즈바이어스"
+          />
+        </InputBox>
         <br />
         <InputBox>
           썸네일을 업로드 해주시기 바랍니다.
