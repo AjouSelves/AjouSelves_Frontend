@@ -135,7 +135,7 @@ function GoodsInfo() {
         alert("참여취소를 성공했습니다!");
         window.location.reload();
       } else {
-        alert("이미 참여한 프로젝트입니다!");
+        alert("참여하지 않은 프로젝트입니다!");
       }
     });
   };
