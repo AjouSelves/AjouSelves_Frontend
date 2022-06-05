@@ -50,10 +50,26 @@ function Goods() {
   return (
     <div>
       <GlobalFonts />
-      <div style={{ fontSize: "32px", fontWeight: "500" }}>
-        🤝🏻 모집중인 굿즈 리스트
-      </div>
       <Container>
+        <div
+          style={{
+            fontSize: "32px",
+            fontWeight: "500",
+            borderBottom: "1px solid black",
+            paddingBottom: "10px",
+          }}
+        >
+          🤝🏻 모집중인 굿즈 리스트
+        </div>
+        <div
+          style={{ borderBottom: "1px solid black", paddingBottom: "10px" }}
+        ></div>
+        <div
+          style={{ borderBottom: "1px solid black", paddingBottom: "10px" }}
+        ></div>
+        <div
+          style={{ borderBottom: "1px solid black", paddingBottom: "10px" }}
+        ></div>
         {GoodsList.map((GoodsList) => (
           <Card
             key={GoodsList.projid}
