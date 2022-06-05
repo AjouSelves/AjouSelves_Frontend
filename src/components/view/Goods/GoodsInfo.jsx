@@ -9,6 +9,7 @@ import { SERVER_URL } from "../../../_actions/types";
 import {
   projDelete,
   projJoin,
+  projLeave,
   projGetById,
 } from "../../../_actions/goods_actions";
 
@@ -62,7 +63,10 @@ function GoodsInfo() {
   const [projid] = useState(state);
   const GoodsList = useSelector((state) => state.goods.getAll);
 
+  const [PhoneNumber, setPhoneNumber] = useState("");
+
   const [chkPoster, setChkPoster] = useState(0);
+  const [chkJoined, setChkJoined] = useState(0);
 
   const Goods = useMemo(() => {
     return GoodsList.find((f) => f.projid === projid);
@@ -78,8 +82,10 @@ function GoodsInfo() {
     };
 
     dispatch(projGetById(projid, header)).then((res) => {
-      console.log(res.payload[1].is_poster);
+      console.log(res);
+      setPhoneNumber(res.payload[0].phonenumber);
       setChkPoster(res.payload[1].is_poster);
+      setChkJoined(res.payload[2].is_joined);
     });
   }, []);
 
@@ -123,6 +129,17 @@ function GoodsInfo() {
     });
   };
 
+  const onLeaveHandler = () => {
+    dispatch(projLeave(Goods.projid, header)).then((res) => {
+      if (res.payload.status === "success") {
+        alert("참여취소를 성공했습니다!");
+        window.location.reload();
+      } else {
+        alert("이미 참여한 프로젝트입니다!");
+      }
+    });
+  };
+
   console.log(Goods);
 
   const [Image] = useState(Goods.url);
@@ -132,7 +149,6 @@ function GoodsInfo() {
     <GoodsListBlock>
       <Container>
         <GlobalFonts />
-
         <Body>
           <div>
             {!Image ? (
@@ -168,18 +184,17 @@ function GoodsInfo() {
             <h2
               style={{ borderBottom: "2px solid black", paddingBottom: "20px" }}
             >
-              {Goods.title}
+              🌟 {Goods.title}
             </h2>
-
-            <div style={{ padding: "10px" }}>목표 금액: </div>
-            <hr />
-
             <div style={{ padding: "10px" }}>
-              최소 모집인원: {Goods.min_num}
+              💰 1인당 굿즈 가격: {Goods.amount}
             </div>
-
+            <hr />
             <div style={{ padding: "10px" }}>
-              현재 참여인원: {Goods.cur_num}
+              👨‍👩‍👦 최소 모집인원: {Goods.min_num}
+            </div>
+            <div style={{ padding: "10px" }}>
+              👨‍👩‍👦 현재 참여인원: {Goods.cur_num}
               <div
                 style={{
                   fontSize: "12px",
@@ -192,18 +207,26 @@ function GoodsInfo() {
                 {percentage(Goods.min_num, Goods.cur_num)} 달성
               </div>
             </div>
-
             <hr />
-
-            <div style={{ padding: "10px" }}>문의 연락처: </div>
-            <StyledButton style={{ width: "100%" }} onClick={onJoinHandler}>
-              펀딩 참여하러 가기 😃
-            </StyledButton>
+            <div style={{ padding: "10px" }}>📞 문의 연락처</div>
+            <div>{PhoneNumber}</div>
+            {chkJoined === 0 ? (
+              <StyledButton style={{ width: "100%" }} onClick={onJoinHandler}>
+                펀딩 참여하러 가기 😃
+              </StyledButton>
+            ) : (
+              <StyledButton style={{ width: "100%" }} onClick={onLeaveHandler}>
+                참여 취소하기
+              </StyledButton>
+            )}
           </div>
         </Body>
         <div style={{ marginTop: "150px" }}>
-          <h2>굿즈 소개</h2>
-          <div style={{ whiteSpace: "pre-wrap" }}>{Goods.explained}</div>
+          <h2>📝 굿즈 소개</h2>
+          <hr />
+          <div style={{ whiteSpace: "pre-wrap", padding: "30px 0" }}>
+            {Goods.explained}
+          </div>
         </div>
       </Container>
     </GoodsListBlock>

@@ -74,3 +74,10 @@ export function projJoin(id, header) {
     .then((res) => res.data);
   return { type: PROJ_JOIN, payload: req };
 }
+
+export function projLeave(id, header) {
+  const req = axios
+    .get(`${SERVER_URL_API}/proj/leave/${id}`, header)
+    .then((res) => res.data);
+  return { type: PROJ_LEAVE, payload: req };
+}

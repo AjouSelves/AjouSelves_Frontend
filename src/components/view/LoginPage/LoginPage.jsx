@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { loginUser } from "../../../_actions/user_actions";
+import logo3 from "../../../images/logo3.jpg";
 
 const StyledForm = styled.form`
   display: flex;
@@ -15,7 +16,7 @@ const StyledForm = styled.form`
 `;
 
 const StyledInput = styled.input`
-  width: 100%;
+  width: 98%;
   height: 48px;
   margin-top: 10px;
 `;
@@ -58,7 +59,14 @@ function LoginPage() {
   };
 
   return (
-    <div style={{ width: "384px", margin: "200px auto" }}>
+    <div
+      style={{ width: "384px", margin: "75px auto 200px", textAlign: "center" }}
+    >
+      <img src={logo3} alt="123" width="300px" />
+      <div>지금 회원가입하시면</div>
+      <div>
+        아주대 <strong>한정판 굿즈 스티커</strong>를 드려요
+      </div>
       <StyledForm onSubmit={onSubmitHandler}>
         <StyledInput
           type="email"
