@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-import GlobalFonts from "../../../font/font";
 import { projEdit, projEditPhoto } from "../../../_actions/goods_actions";
 import { SERVER_URL } from "../../../_actions/types";
 
@@ -144,7 +143,6 @@ function GoodsEdit() {
   };
   return (
     <div style={{ width: "1200px", margin: "0 auto" }}>
-      <GlobalFonts />
       <StyledForm onSubmit={onSubmitHandler}>
         <InputBox>
           🌟 굿즈의 이름을 지어주세요

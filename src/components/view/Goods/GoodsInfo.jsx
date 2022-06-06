@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import GlobalFonts from "../../../font/font";
 import thumbnail from "../../../images/thumbnail.jpeg";
 import { SERVER_URL } from "../../../_actions/types";
 import {
@@ -149,7 +148,6 @@ function GoodsInfo() {
   return (
     <GoodsListBlock>
       <Container>
-        <GlobalFonts />
         <Body>
           <div>
             {!Image ? (

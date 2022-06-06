@@ -1,3 +1,12 @@
+@font-face {
+    font-family: "NanumSquareL";
+    src: url("./font/NanumSquareL.woff");
+}
+
+.App{
+    font-family: 'NanumSquareL';
+}
+
 .red{color: red}
 
 .active{
@@ -8,3 +17,4 @@
 .unactive{
     background: #efefef;
 }
+

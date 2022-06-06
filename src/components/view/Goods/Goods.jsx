@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { SERVER_URL } from "../../../_actions/types";
 import { projGetAll } from "../../../_actions/goods_actions";
 import thumbnail from "../../../images/thumbnail.jpeg";
-import GlobalFonts from "../../../font/font";
 
 // 굿즈 정보 받아오는 컴포넌트
 
@@ -49,7 +48,6 @@ function Goods() {
 
   return (
     <div>
-      <GlobalFonts />
       <Container>
         <div
           style={{
