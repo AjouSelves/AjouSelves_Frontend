@@ -88,7 +88,7 @@ function Goods() {
               style={{
                 width: "300px",
                 display: "grid",
-                gridTemplateColumns: "1.8fr 1fr",
+                gridTemplateColumns: "1.5fr 1fr",
                 gridAutoRows: "minmax(25px, auto)",
                 justifyItems: "end",
                 alignItems: "end",
@@ -114,7 +114,7 @@ function Goods() {
                     justifyContent: "space-between",
                   }}
                 >
-                  <div style={{ fontSize: "16px" }}>
+                  <div style={{ fontSize: "15px" }}>
                     {GoodsList.cur_num}명 / {GoodsList.min_num}명
                   </div>
                   <div style={{ color: "red" }}>
