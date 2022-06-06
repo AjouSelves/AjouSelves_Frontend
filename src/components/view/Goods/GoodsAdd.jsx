@@ -87,8 +87,8 @@ function GoodsAdd() {
         require: "",
         amount: Amount,
       };
-      console.log("body: ", body);
-      console.log("header: ", header);
+      // console.log("body: ", body);
+      // console.log("header: ", header);
       dispatch(projAdd(body, header)).then((res) => {
         if (res.payload.status === "success") {
           alert("등록 완료");
@@ -105,8 +105,8 @@ function GoodsAdd() {
         },
       };
 
-      console.log("Files is");
-      console.log(Files);
+      // console.log("Files is");
+      // console.log(Files);
 
       formData.append("title", Title);
       formData.append("explained", Explained);

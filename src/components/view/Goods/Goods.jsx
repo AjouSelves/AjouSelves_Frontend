@@ -64,7 +64,7 @@ function Goods() {
           <Card
             key={GoodsList.projid}
             onClick={() => {
-              console.log(GoodsList.projid);
+              // console.log(GoodsList.projid);
               if (login_token === null) alert("로그인 후 진행해주세요!");
               else navigate("/goods/info", { state: GoodsList.projid });
             }}

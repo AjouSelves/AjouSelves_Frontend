@@ -99,11 +99,11 @@ function UserInfo(props) {
       account: "",
     };
 
-    console.log(body);
+    // console.log(body);
 
     if (Password === ConfirmPassword) {
       dispatch(editUserInfo(body, header)).then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.payload.status === "success") {
           alert("회원정보 수정에 성공했습니다!");
         }

@@ -58,7 +58,7 @@ function GoodsEdit() {
   const navigate = useNavigate();
 
   const { state } = useLocation();
-  console.log(state);
+  // console.log(state);
 
   const [Title, setTitle] = useState(state.title);
   const [Explained, setExplained] = useState(state.explained);
@@ -73,8 +73,8 @@ function GoodsEdit() {
   const formData = new FormData();
 
   if (Image === null) {
-    console.log("image is null");
-    console.log(Image);
+    // console.log("image is null");
+    // console.log(Image);
   }
 
   const onSubmitHandler = (e) => {
@@ -83,7 +83,7 @@ function GoodsEdit() {
     const login_token = window.localStorage.getItem("login-token");
 
     if (Files === undefined) {
-      console.log("projEdit");
+      // console.log("projEdit");
       let header = {
         headers: {
           Authorization: login_token,
@@ -114,8 +114,8 @@ function GoodsEdit() {
         },
       };
 
-      console.log("Files is");
-      console.log(Files);
+      // console.log("Files is");
+      // console.log(Files);
 
       formData.append("title", Title);
       formData.append("explained", Explained);
@@ -128,8 +128,8 @@ function GoodsEdit() {
         formData.append("photo", Files[i]);
       }
 
-      console.log(formData.getAll("photo"));
-      console.log(state.projid);
+      // console.log(formData.getAll("photo"));
+      // console.log(state.projid);
 
       dispatch(projEditPhoto(state.projid, formData, header)).then((res) => {
         if (res.payload.status === "success") {

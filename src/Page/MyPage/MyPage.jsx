@@ -68,7 +68,7 @@ function MyPage() {
   const deleteHandler = () => {
     if (chkPassword || chkPasswordDel) {
       dispatch(deleteUser(header)).then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.payload.status === "success") {
           alert("회원탈퇴 되었습니다!");
           localStorage.clear();
@@ -85,11 +85,11 @@ function MyPage() {
   const passVeri = (e) => {
     e.preventDefault();
     let body = { password: currPass };
-    console.log(body);
-    console.log(header);
+    // console.log(body);
+    // console.log(header);
 
     dispatch(passwordVerify(body, header)).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.payload.status === "succes") setChkPassword(true);
       else if (res.payload.status === "fail")
         alert("현재 비밀번호가 올바르지 않습니다!");
@@ -99,12 +99,12 @@ function MyPage() {
   const passVeriDel = (e) => {
     e.preventDefault();
     let body = { password: currPass };
-    console.log(body);
-    console.log(header);
+    // console.log(body);
+    // console.log(header);
     alert();
 
     dispatch(passwordVerify(body, header)).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.payload.status === "succes") {
         setChkPasswordDel(true);
         deleteHandler();
@@ -120,7 +120,7 @@ function MyPage() {
     dispatch(getJoinTitle(header)).then((res) => {
       if (res.payload.status === "fail") setJoinedList(1);
       else {
-        console.log(res.payload.data);
+        // console.log(res.payload.data);
         setJoinedList(res.payload.data);
       }
     });
@@ -130,7 +130,7 @@ function MyPage() {
     dispatch(getCreateTitle(header)).then((res) => {
       if (res.payload.status === "fail") setCreatedList(1);
       else {
-        console.log(res.payload.data);
+        // console.log(res.payload.data);
         setCreatedList(res.payload.data);
       }
     });

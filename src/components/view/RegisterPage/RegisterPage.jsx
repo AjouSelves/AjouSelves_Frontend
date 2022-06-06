@@ -81,7 +81,7 @@ function RegisterPage() {
       socialtype: "local",
     };
 
-    console.log("body: ", body);
+    // console.log("body: ", body);
 
     if (!isChked) alert("이메일 인증을 진행해주세요");
     else {
@@ -89,7 +89,7 @@ function RegisterPage() {
         return alert("비밀번호가 올바르지 않습니다!");
       } else {
         dispatch(registerUser(body)).then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.payload) {
             alert(
               "회원가입이 완료되었습니다.\n첫 굿즈인 스티커 수령은 파란학기 굿즈바이어스 부스 또는 도서관카페에서 수령하실 수 있습니다!"
@@ -110,7 +110,7 @@ function RegisterPage() {
       if (res.payload.status === "fail") {
         alert("중복된 이메일입니다");
       } else {
-        console.log(res.payload.number);
+        // console.log(res.payload.number);
         setVerifyNum(res.payload.number);
         setChkVerify(true);
       }
@@ -120,8 +120,8 @@ function RegisterPage() {
   const emailHandler = (e) => {
     e.preventDefault();
 
-    console.log(VerifyNum);
-    console.log(EmailNum);
+    // console.log(VerifyNum);
+    // console.log(EmailNum);
 
     if (VerifyNum === parseInt(EmailNum)) {
       alert("인증이 완료되었습니다!");

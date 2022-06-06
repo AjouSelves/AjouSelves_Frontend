@@ -81,7 +81,7 @@ function GoodsInfo() {
     };
 
     dispatch(projGetById(projid, header)).then((res) => {
-      console.log(res);
+      // console.log(res);
       setPhoneNumber(res.payload[0].phonenumber);
       setChkPoster(res.payload[1].is_poster);
       setChkJoined(res.payload[2].is_joined);
@@ -97,9 +97,9 @@ function GoodsInfo() {
   };
 
   const onDeleteHandler = () => {
-    console.log("delete 실행");
+    // console.log("delete 실행");
 
-    console.log("header: ", header);
+    // console.log("header: ", header);
 
     dispatch(projDelete(Goods.projid, header)).then((res) => {
       if (res.payload.text === "success") {
@@ -112,9 +112,9 @@ function GoodsInfo() {
   };
 
   const onEditHandler = () => {
-    console.log("edit 실행");
+    // console.log("edit 실행");
 
-    console.log("header: ", header);
+    // console.log("header: ", header);
     navigate("/goods/edit", { state: Goods });
   };
 
@@ -140,10 +140,10 @@ function GoodsInfo() {
     });
   };
 
-  console.log(Goods);
+  // console.log(Goods);
 
   const [Image] = useState(Goods.url);
-  console.log(Image);
+  // console.log(Image);
 
   return (
     <GoodsListBlock>

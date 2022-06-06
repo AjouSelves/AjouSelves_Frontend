@@ -50,11 +50,11 @@ function Header() {
   useEffect(() => {
     if (chk.loginSuccess) {
       if (chk.loginSuccess.status === "success") {
-        console.log(chk.loginSuccess.token);
+        // console.log(chk.loginSuccess.token);
         setLogined(!Logined);
       }
     } else {
-      console.log("chk is null");
+      // console.log("chk is null");
     }
   }, [chk.loginSuccess]);
 
