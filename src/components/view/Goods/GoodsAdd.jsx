@@ -214,12 +214,16 @@ function GoodsAdd() {
           />
         </InputBox>
         <StyledButton
-          type="submit"
+          // type="submit"
           style={{
             width: "100%",
             height: "30px",
             alignSelf: "center",
             marginTop: "50px",
+          }}
+          onClick={() => {
+            alert("등록 요청이 완료되었습니다!");
+            navigate("/");
           }}
         >
           굿즈 모집하기
