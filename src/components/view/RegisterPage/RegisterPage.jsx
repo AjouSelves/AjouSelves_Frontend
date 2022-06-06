@@ -20,6 +20,7 @@ const StyledInput = styled.input`
   margin-top: 10px;
   border: none;
   border-bottom: 1px solid black;
+  outline: none;
 `;
 
 const StyledSelect = styled.select`
@@ -139,32 +140,50 @@ function RegisterPage() {
           <StyledLabel>
             <strong className="red">*</strong> 이메일
           </StyledLabel>
-          <StyledInput
-            type="email"
-            value={Email}
-            onChange={(e) => {
-              setEmail(e.currentTarget.value);
-            }}
-            placeholder="이메일을 입력해주세요."
-            required
-          />
-          {!Completed && (
-            <StyledButton onClick={emailVeriHandler}>이메일 인증</StyledButton>
-          )}
+          <div style={{ display: "flex" }}>
+            <StyledInput
+              type="email"
+              value={Email}
+              onChange={(e) => {
+                setEmail(e.currentTarget.value);
+              }}
+              placeholder="이메일을 입력해주세요."
+              required
+            />
+            {!Completed && (
+              <StyledButton
+                style={{ height: "100%", margin: "auto" }}
+                onClick={emailVeriHandler}
+              >
+                이메일 인증
+              </StyledButton>
+            )}
+          </div>
         </InputBox>
         {ChkVerify && (
           <InputBox>
             <StyledLabel>인증번호입력</StyledLabel>
-            <StyledInput
-              placeholder="인증번호 6자리를 입력해주세요"
-              onChange={(e) => {
-                setEmailNum(e.currentTarget.value);
-              }}
-            ></StyledInput>
-            <StyledButton onClick={emailHandler}>인증번호 입력</StyledButton>
+            <div style={{ display: "flex" }}>
+              <StyledInput
+                placeholder="인증번호 6자리를 입력해주세요"
+                onChange={(e) => {
+                  setEmailNum(e.currentTarget.value);
+                }}
+              ></StyledInput>
+              <StyledButton
+                style={{ margin: "auto", height: "100%" }}
+                onClick={emailHandler}
+              >
+                인증번호 입력
+              </StyledButton>
+            </div>
           </InputBox>
         )}
-        {Completed && <div>✅ 이메일 인증이 완료되었습니다.</div>}
+        {Completed && (
+          <div style={{ marginTop: "10px" }}>
+            ✅ 이메일 인증이 완료되었습니다.
+          </div>
+        )}
         <InputBox>
           <StyledLabel>
             <strong className="red">*</strong> 비밀번호
