@@ -267,7 +267,7 @@ function MyPage() {
             ))}
           </div>
         )}
-        {userInfo && chkButton === 2 && (
+        {userInfo && chkButton === 2 && CreatedList !== 1 && (
           <div
             style={{
               width: "830px",
