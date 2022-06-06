@@ -53,7 +53,15 @@ export function editUserInfo(body, header) {
 
 export function getJoinTitle(header) {
   const request = axios
-    .get(`${SERVER_URL_API}/user/join`, header)
+    .get(`${SERVER_URL_API}/user/join-detail`, header)
+    .then((response) => response.data);
+
+  return { type: GET_JOIN_TITLE, payload: request };
+}
+
+export function getCreateTitle(header) {
+  const request = axios
+    .get(`${SERVER_URL_API}/user/create-detail`, header)
     .then((response) => response.data);
 
   return { type: GET_JOIN_TITLE, payload: request };

@@ -7,14 +7,30 @@ import {
   getUserInfo,
   deleteUser,
   getJoinTitle,
+  getCreateTitle,
   passwordVerify,
 } from "../../_actions/user_actions";
+import { SERVER_URL } from "../../_actions/types";
+import thumbnail from "../../images/thumbnail.jpeg";
 import UserInfo from "../../components/view/MyPageInfo/UserInfo";
+
+const Card = styled.div`
+  padding: 20px;
+
+  cursor: pointer;
+`;
 
 const StyledButton = styled.button`
   width: 100%;
   border: none;
   padding: 20px 10px;
+  cursor: pointer;
+`;
+
+const StyledButtonSmall = styled.button`
+  border: none;
+  background: #24272b;
+  color: white;
   cursor: pointer;
 `;
 
@@ -39,14 +55,10 @@ function MyPage() {
       }
     });
 
-    dispatch(getJoinTitle(header)).then((res) => {
-      // console.log(res.payload.data);
-    });
-
     return () => (isLoading = false);
   }, []);
 
-  const [chkButton, setChkButton] = useState(0);
+  const [chkButton, setChkButton] = useState(1);
   const [currPass, setCurrPass] = useState("");
   const [chkPassword, setChkPassword] = useState(false);
   const [chkPasswordDel, setChkPasswordDel] = useState(false);
@@ -87,6 +99,7 @@ function MyPage() {
     let body = { password: currPass };
     console.log(body);
     console.log(header);
+    alert();
 
     dispatch(passwordVerify(body, header)).then((res) => {
       console.log(res);
@@ -97,6 +110,25 @@ function MyPage() {
         alert("현재 비밀번호가 올바르지 않습니다!");
     });
   };
+
+  const [JoinedList, setJoinedList] = useState("");
+  const [CreatedList, setCreatedList] = useState("");
+
+  useEffect(() => {
+    dispatch(getJoinTitle(header)).then((res) => {
+      console.log(res.payload.data);
+      setJoinedList(res.payload.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatch(getCreateTitle(header)).then((res) => {
+      console.log(res.payload.data);
+      setCreatedList(res.payload.data);
+    });
+  }, []);
+
+  if (!JoinedList || !CreatedList) return null;
 
   return (
     <div>
@@ -160,8 +192,104 @@ function MyPage() {
           </StyledButton>
           {/* onClick={deleteHandler} */}
         </div>
-        {userInfo && chkButton === 1 && <div>main</div>}
-        {userInfo && chkButton === 2 && <div>user info is here 2</div>}
+        {userInfo && chkButton === 1 && (
+          <div
+            style={{
+              width: "830px",
+              float: "right",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr ",
+            }}
+          >
+            {JoinedList.map((JoinedList) => (
+              <Card
+                key={JoinedList.projid}
+                onClick={() => {
+                  navigate("/goods/info", { state: JoinedList.projid });
+                }}
+              >
+                {JoinedList.url ? (
+                  <img
+                    alt="no_image"
+                    src={`${SERVER_URL}${JoinedList.url}`}
+                    width="300px"
+                    height="300px"
+                  />
+                ) : (
+                  <img
+                    alt="thumbnail"
+                    src={thumbnail}
+                    width="200px"
+                    height="200px"
+                  />
+                )}
+                <div>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "18px",
+                        fontWeight: "500",
+                        marginTop: "10px",
+                      }}
+                    >
+                      {JoinedList.title}
+                    </div>
+                    <div>{JoinedList.nickname}</div>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        )}
+        {userInfo && chkButton === 2 && (
+          <div
+            style={{
+              width: "830px",
+              float: "right",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr ",
+            }}
+          >
+            {CreatedList.map((CreatedList) => (
+              <Card
+                key={CreatedList.projid}
+                onClick={() => {
+                  navigate("/goods/info", { state: CreatedList.projid });
+                }}
+              >
+                {CreatedList.url ? (
+                  <img
+                    alt="no_image"
+                    src={`${SERVER_URL}${CreatedList.url}`}
+                    width="300px"
+                    height="300px"
+                  />
+                ) : (
+                  <img
+                    alt="thumbnail"
+                    src={thumbnail}
+                    width="200px"
+                    height="200px"
+                  />
+                )}
+                <div>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "18px",
+                        fontWeight: "500",
+                        marginTop: "10px",
+                      }}
+                    >
+                      {CreatedList.title}
+                    </div>
+                    <div>{CreatedList.nickname}</div>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        )}
         {userInfo && chkButton === 3 && !chkPassword && (
           <div style={{ width: "830px", float: "right" }}>
             <div style={{ textAlign: "center", marginTop: "60px" }}>
@@ -175,7 +303,7 @@ function MyPage() {
                     setCurrPass(e.currentTarget.value);
                   }}
                 ></input>
-                <button onClick={passVeri}>확인</button>
+                <StyledButtonSmall onClick={passVeri}>확인</StyledButtonSmall>
               </form>
             </div>
           </div>
@@ -185,7 +313,9 @@ function MyPage() {
             <UserInfo props={userInfo} />
           </div>
         )}
-        {userInfo && chkButton === 4 && <div>결제완료굿즈</div>}
+        {userInfo && chkButton === 4 && (
+          <div style={{ width: "830px", float: "right" }}></div>
+        )}
         {userInfo && chkButton === 5 && (
           <div style={{ width: "830px", float: "right" }}>
             <div style={{ textAlign: "center", marginTop: "60px" }}>
@@ -199,7 +329,9 @@ function MyPage() {
                     setCurrPass(e.currentTarget.value);
                   }}
                 ></input>
-                <button onClick={passVeriDel}>확인</button>
+                <StyledButtonSmall onClick={passVeriDel}>
+                  확인
+                </StyledButtonSmall>
               </form>
             </div>
           </div>
