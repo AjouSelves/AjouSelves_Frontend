@@ -5,6 +5,7 @@ import {
   DELETE_USER,
   EDIT_USER_INFO,
   GET_JOIN_TITLE,
+  GET_CREATE_TITLE,
   PASSWORD_VERIFY,
   EMAIL_VERIFY,
 } from "../_actions/types";
@@ -29,6 +30,9 @@ export default function (state = {}, action) {
 
     case GET_JOIN_TITLE:
       return { ...state, getJoinTitle: action.payload };
+
+    case GET_CREATE_TITLE:
+      return { ...state, getCreateTitle: action.payload };
 
     case PASSWORD_VERIFY:
       return { ...state, passVeri: action.payload };

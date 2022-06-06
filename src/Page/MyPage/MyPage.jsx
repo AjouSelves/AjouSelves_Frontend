@@ -10,6 +10,7 @@ import {
   getCreateTitle,
   passwordVerify,
 } from "../../_actions/user_actions";
+import { projGetAll } from "../../_actions/goods_actions";
 import { SERVER_URL } from "../../_actions/types";
 import thumbnail from "../../images/thumbnail.jpeg";
 import UserInfo from "../../components/view/MyPageInfo/UserInfo";
@@ -40,6 +41,7 @@ function MyPage() {
   const { state } = useLocation();
 
   const [userInfo, setUserInfo] = useState();
+  const [GoodsList, setGoodsList] = useState();
 
   let header = {
     headers: {
@@ -116,15 +118,27 @@ function MyPage() {
 
   useEffect(() => {
     dispatch(getJoinTitle(header)).then((res) => {
-      console.log(res.payload.data);
-      setJoinedList(res.payload.data);
+      if (res.payload.status === "fail") setJoinedList(1);
+      else {
+        console.log(res.payload.data);
+        setJoinedList(res.payload.data);
+      }
     });
   }, []);
 
   useEffect(() => {
     dispatch(getCreateTitle(header)).then((res) => {
-      console.log(res.payload.data);
-      setCreatedList(res.payload.data);
+      if (res.payload.status === "fail") setCreatedList(1);
+      else {
+        console.log(res.payload.data);
+        setCreatedList(res.payload.data);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatch(projGetAll()).then((res) => {
+      setGoodsList(res.payload);
     });
   }, []);
 
@@ -153,6 +167,7 @@ function MyPage() {
             className={chkButton === 1 ? "active" : "unactive"}
             onClick={() => {
               setChkButton(1);
+              if (JoinedList === 1) alert("참여하신 굿즈가 없습니다!");
             }}
           >
             내가 참여한 굿즈
@@ -161,6 +176,7 @@ function MyPage() {
             className={chkButton === 2 ? "active" : "unactive"}
             onClick={() => {
               setChkButton(2);
+              if (CreatedList === 1) alert("제작하신 굿즈가 없습니다!");
             }}
           >
             내가 제작한 굿즈
@@ -190,9 +206,8 @@ function MyPage() {
           >
             회원 탈퇴하기
           </StyledButton>
-          {/* onClick={deleteHandler} */}
         </div>
-        {userInfo && chkButton === 1 && (
+        {userInfo && chkButton === 1 && JoinedList !== 1 && (
           <div
             style={{
               width: "830px",
@@ -201,6 +216,17 @@ function MyPage() {
               gridTemplateColumns: "1fr 1fr 1fr ",
             }}
           >
+            <div
+              style={{
+                fontSize: "32px",
+                fontWeight: "500",
+                borderBottom: "1px solid black",
+                paddingBottom: "10px",
+                gridColumn: "1/span3",
+              }}
+            >
+              내가 참여한 굿즈
+            </div>
             {JoinedList.map((JoinedList) => (
               <Card
                 key={JoinedList.projid}
@@ -250,6 +276,17 @@ function MyPage() {
               gridTemplateColumns: "1fr 1fr 1fr ",
             }}
           >
+            <div
+              style={{
+                fontSize: "32px",
+                fontWeight: "500",
+                borderBottom: "1px solid black",
+                paddingBottom: "10px",
+                gridColumn: "1/span3",
+              }}
+            >
+              내가 제작한 굿즈
+            </div>
             {CreatedList.map((CreatedList) => (
               <Card
                 key={CreatedList.projid}

@@ -57,19 +57,11 @@ function Goods() {
             fontWeight: "500",
             borderBottom: "1px solid black",
             paddingBottom: "10px",
+            gridColumn: "1/span4",
           }}
         >
           🤝🏻 모집중인 굿즈 리스트
         </div>
-        <div
-          style={{ borderBottom: "1px solid black", paddingBottom: "10px" }}
-        ></div>
-        <div
-          style={{ borderBottom: "1px solid black", paddingBottom: "10px" }}
-        ></div>
-        <div
-          style={{ borderBottom: "1px solid black", paddingBottom: "10px" }}
-        ></div>
         {GoodsList.map((GoodsList) => (
           <Card
             key={GoodsList.projid}
@@ -98,7 +90,7 @@ function Goods() {
               style={{
                 width: "300px",
                 display: "grid",
-                gridTemplateColumns: "1.5fr 1fr",
+                gridTemplateColumns: "1.8fr 1fr",
                 gridAutoRows: "minmax(25px, auto)",
                 justifyItems: "end",
                 alignItems: "end",

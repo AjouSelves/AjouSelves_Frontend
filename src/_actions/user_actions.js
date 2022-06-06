@@ -8,6 +8,7 @@ import {
   DELETE_USER,
   EDIT_USER_INFO,
   GET_JOIN_TITLE,
+  GET_CREATE_TITLE,
 } from "./types";
 
 export function loginUser(dataToSubmit) {
@@ -64,7 +65,7 @@ export function getCreateTitle(header) {
     .get(`${SERVER_URL_API}/user/create-detail`, header)
     .then((response) => response.data);
 
-  return { type: GET_JOIN_TITLE, payload: request };
+  return { type: GET_CREATE_TITLE, payload: request };
 }
 
 export function passwordVerify(body, header) {
