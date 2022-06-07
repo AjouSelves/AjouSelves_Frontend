@@ -12,6 +12,11 @@ import {
   projGetById,
 } from "../../../_actions/goods_actions";
 
+const StyledSelect = styled.select`
+  width: 50%;
+  height: 30px;
+`;
+
 const Container = styled.div`
   font-weight: 200;
   font-size: 18px;
@@ -39,7 +44,7 @@ const StyledButton = styled.button`
   border: none;
   background: #24272b;
   color: white;
-  margin-top: 30px;
+
   padding: 8px 15px;
   height: 32px;
   font-size: 15px;
@@ -143,6 +148,9 @@ function GoodsInfo() {
   // console.log(Goods);
 
   const [Image] = useState(Goods.url);
+  const [ProjState, setProjState] = useState(Goods.state);
+
+  const ChangeStateHandler = () => {};
   // console.log(Image);
 
   return (
@@ -166,7 +174,11 @@ function GoodsInfo() {
               />
             )}
             {chkPoster === 1 && (
-              <div>
+              <div
+                style={{
+                  marginTop: "20px",
+                }}
+              >
                 <StyledButton
                   style={{ background: "red", marginRight: "10px" }}
                   onClick={onDeleteHandler}
@@ -181,7 +193,10 @@ function GoodsInfo() {
           </div>
           <div>
             <h2
-              style={{ borderBottom: "2px solid black", paddingBottom: "20px" }}
+              style={{
+                borderBottom: "2px solid black",
+                paddingBottom: "20px",
+              }}
             >
               🌟 {Goods.title}
             </h2>
@@ -208,14 +223,43 @@ function GoodsInfo() {
             <div style={{ padding: "10px" }}>📞 문의 연락처</div>
             <div>{PhoneNumber}</div>
             {chkJoined === 0 ? (
-              <StyledButton style={{ width: "100%" }} onClick={onJoinHandler}>
-                펀딩 참여하러 가기 😃
-              </StyledButton>
+              !chkPoster && (
+                <StyledButton
+                  style={{ width: "100%", marginTop: "30px" }}
+                  onClick={onJoinHandler}
+                >
+                  펀딩 참여하러 가기 😃
+                </StyledButton>
+              )
             ) : (
-              <StyledButton style={{ width: "100%" }} onClick={onLeaveHandler}>
+              <StyledButton
+                style={{ width: "100%", marginTop: "30px" }}
+                onClick={onLeaveHandler}
+              >
                 펀딩 참여 취소하기 😢
               </StyledButton>
             )}
+            {/* {chkPoster && (
+              <div style={{ marginTop: "30px" }}>
+                <StyledSelect
+                  onChange={(e) => {
+                    setProjState(e.target.value);
+                  }}
+                >
+                  <option value="none">====선택====</option>
+                  <option value="1">모집중</option>
+                  <option value="2">결제중</option>
+                  <option value="3">작업중</option>
+                  <option value="4">종료</option>
+                </StyledSelect>
+                <StyledButton
+                  style={{ marginLeft: "15px" }}
+                  onClick={ChangeStateHandler}
+                >
+                  상태 바꾸기
+                </StyledButton>
+              </div>
+            )} */}
           </div>
         </Body>
         <div style={{ marginTop: "150px" }}>
