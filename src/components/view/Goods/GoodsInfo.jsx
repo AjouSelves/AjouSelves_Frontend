@@ -68,6 +68,7 @@ function GoodsInfo() {
 
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [CurNum, setCurNum] = useState();
+  const [ProjState, setProjState] = useState(0);
 
   const [chkPoster, setChkPoster] = useState(0);
   const [chkJoined, setChkJoined] = useState(0);
@@ -91,6 +92,7 @@ function GoodsInfo() {
       setChkPoster(res.payload[1].is_poster);
       setChkJoined(res.payload[2].is_joined);
       setCurNum(res.payload[0].cur_num);
+      setProjState(res.payload[0].state);
     });
   }, [Goods.cur_num]);
 
@@ -148,7 +150,6 @@ function GoodsInfo() {
   // console.log(Goods);
 
   const [Image] = useState(Goods.url);
-  const [ProjState, setProjState] = useState(Goods.state);
 
   const ChangeStateHandler = () => {};
   // console.log(Image);
@@ -222,16 +223,15 @@ function GoodsInfo() {
             <hr />
             <div style={{ padding: "10px" }}>📞 문의 연락처</div>
             <div>{PhoneNumber}</div>
-            {chkJoined === 0 ? (
-              !chkPoster && (
-                <StyledButton
-                  style={{ width: "100%", marginTop: "30px" }}
-                  onClick={onJoinHandler}
-                >
-                  펀딩 참여하러 가기 😃
-                </StyledButton>
-              )
-            ) : (
+            {chkJoined === 0 && ProjState === 1 && !chkPoster && (
+              <StyledButton
+                style={{ width: "100%", marginTop: "30px" }}
+                onClick={onJoinHandler}
+              >
+                펀딩 참여하러 가기 😃
+              </StyledButton>
+            )}
+            {chkJoined === 1 && ProjState === 1 && (
               <StyledButton
                 style={{ width: "100%", marginTop: "30px" }}
                 onClick={onLeaveHandler}
@@ -262,7 +262,17 @@ function GoodsInfo() {
             )} */}
           </div>
         </Body>
-        <div style={{ marginTop: "150px" }}>
+        {chkJoined === 1 && ProjState === 2 && (
+          <div style={{ marginTop: "50px" }}>
+            <h2>굿즈 수령 위치!</h2>
+            <hr />
+            <div>
+              도서관 카페 또는 파란학기 굿즈바이어스 부스로 찾아오시면 스티커를
+              수령하실 수 있습니다!
+            </div>
+          </div>
+        )}
+        <div style={{ marginTop: "100px" }}>
           <h2>📝 굿즈 소개</h2>
           <hr />
           <div style={{ whiteSpace: "pre-wrap", padding: "30px 0" }}>
