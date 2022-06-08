@@ -55,7 +55,7 @@ function Goods() {
             fontWeight: "500",
             borderBottom: "1px solid black",
             paddingBottom: "10px",
-            gridColumn: "1/span4",
+            gridColumn: "1/5",
           }}
         >
           🤝🏻 모집중인 굿즈 리스트

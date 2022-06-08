@@ -222,7 +222,7 @@ function MyPage() {
                 fontWeight: "500",
                 borderBottom: "1px solid black",
                 paddingBottom: "10px",
-                gridColumn: "1/span3",
+                gridColumn: "1/4",
               }}
             >
               내가 참여한 굿즈
@@ -282,7 +282,7 @@ function MyPage() {
                 fontWeight: "500",
                 borderBottom: "1px solid black",
                 paddingBottom: "10px",
-                gridColumn: "1/span3",
+                gridColumn: "1/4",
               }}
             >
               내가 제작한 굿즈

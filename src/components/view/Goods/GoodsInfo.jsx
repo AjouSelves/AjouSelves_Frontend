@@ -128,7 +128,9 @@ function GoodsInfo() {
   const onJoinHandler = () => {
     dispatch(projJoin(Goods.projid, header)).then((res) => {
       if (res.payload.status === "success") {
-        alert("참여를 성공했습니다!");
+        alert(
+          "참여를 성공했습니다! 도서관 카페 또는 파란학기 굿즈바이어스 부스로 찾아오시면 스티커를 수령하실 수 있습니다!"
+        );
         window.location.reload();
       } else {
         alert("이미 참여한 프로젝트입니다!");
@@ -223,7 +225,7 @@ function GoodsInfo() {
             <hr />
             <div style={{ padding: "10px" }}>📞 문의 연락처</div>
             <div>{PhoneNumber}</div>
-            {chkJoined === 0 && ProjState === 1 && !chkPoster && (
+            {chkJoined === 0 && (
               <StyledButton
                 style={{ width: "100%", marginTop: "30px" }}
                 onClick={onJoinHandler}
@@ -231,7 +233,7 @@ function GoodsInfo() {
                 펀딩 참여하러 가기 😃
               </StyledButton>
             )}
-            {chkJoined === 1 && ProjState === 1 && (
+            {chkJoined === 1 && (
               <StyledButton
                 style={{ width: "100%", marginTop: "30px" }}
                 onClick={onLeaveHandler}
@@ -262,13 +264,13 @@ function GoodsInfo() {
             )} */}
           </div>
         </Body>
-        {chkJoined === 1 && ProjState === 2 && (
+        {chkJoined === 1 && (
           <div style={{ marginTop: "50px" }}>
             <h2>굿즈 수령 위치!</h2>
             <hr />
             <div>
-              도서관 카페 또는 파란학기 굿즈바이어스 부스로 찾아오시면 스티커를
-              수령하실 수 있습니다!
+              6월 10일에 도서관 카페 또는 파란학기 굿즈바이어스 부스로
+              찾아오시면 스티커를 수령하실 수 있습니다!
             </div>
           </div>
         )}
