@@ -225,7 +225,7 @@ function GoodsInfo() {
             <hr />
             <div style={{ padding: "10px" }}>📞 문의 연락처</div>
             <div>{PhoneNumber}</div>
-            {chkJoined === 0 && (
+            {chkJoined === 0 && Goods.state === 1 && (
               <StyledButton
                 style={{ width: "100%", marginTop: "30px" }}
                 onClick={onJoinHandler}
@@ -233,7 +233,7 @@ function GoodsInfo() {
                 펀딩 참여하러 가기 😃
               </StyledButton>
             )}
-            {chkJoined === 1 && (
+            {chkJoined === 1 && Goods.state === 1 && (
               <StyledButton
                 style={{ width: "100%", marginTop: "30px" }}
                 onClick={onLeaveHandler}
