@@ -89,7 +89,7 @@ function Goods() {
                 width: "300px",
                 display: "grid",
                 gridTemplateColumns: "1.5fr 1fr",
-                gridAutoRows: "minmax(25px, auto)",
+                // gridAutoRows: "minmax(25px, auto)",
                 justifyItems: "end",
                 alignItems: "end",
               }}
@@ -109,12 +109,11 @@ function Goods() {
               <div className="2">
                 <div
                   style={{
-                    width: "100px",
                     display: "flex",
                     justifyContent: "space-between",
                   }}
                 >
-                  <div style={{ fontSize: "15px" }}>
+                  <div style={{ fontSize: "15px", marginRight: "10px" }}>
                     {GoodsList.cur_num}명 / {GoodsList.min_num}명
                   </div>
                   <div style={{ color: "red" }}>
