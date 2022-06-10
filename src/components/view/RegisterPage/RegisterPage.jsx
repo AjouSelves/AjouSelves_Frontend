@@ -75,32 +75,35 @@ function RegisterPage() {
       email: Email,
       password: Password,
       name: Name,
-      phonenumber: Phonenumber,
-      nickname: Nickname,
-      status: Status,
+      // phonenumber: Phonenumber,
+      phonenumber: "",
+      // nickname: Nickname,
+      nickname: "",
+      // status: Status,
+      status: 1,
       socialtype: "local",
     };
 
     // console.log("body: ", body);
 
-    if (!isChked) alert("이메일 인증을 진행해주세요");
-    else {
-      if (Password !== ConfirmPassword) {
-        return alert("비밀번호가 올바르지 않습니다!");
-      } else {
-        dispatch(registerUser(body)).then((res) => {
-          // console.log(res);
-          if (res.payload) {
-            alert(
-              "회원가입이 완료되었습니다.\n첫 굿즈인 스티커 수령은 파란학기 굿즈바이어스 부스 또는 도서관카페에서 수령하실 수 있습니다!"
-            );
-            navigate("/");
-          } else {
-            alert("error");
-          }
-        });
-      }
+    // if (!isChked) alert("이메일 인증을 진행해주세요");
+    // else {
+    if (Password !== ConfirmPassword) {
+      return alert("비밀번호가 올바르지 않습니다!");
+    } else {
+      dispatch(registerUser(body)).then((res) => {
+        // console.log(res);
+        if (res.payload) {
+          alert(
+            "회원가입이 완료되었습니다.\n첫 굿즈인 스티커 수령은 파란학기 굿즈바이어스 부스 또는 도서관카페에서 수령하실 수 있습니다!"
+          );
+          navigate("/");
+        } else {
+          alert("error");
+        }
+      });
     }
+    // }
   };
 
   const emailVeriHandler = (e) => {
@@ -140,17 +143,17 @@ function RegisterPage() {
           <StyledLabel>
             <strong className="red">*</strong> 이메일
           </StyledLabel>
-          <div style={{ display: "flex" }}>
-            <StyledInput
-              type="email"
-              value={Email}
-              onChange={(e) => {
-                setEmail(e.currentTarget.value);
-              }}
-              placeholder="이메일을 입력해주세요."
-              required
-            />
-            {!Completed && (
+          {/* <div style={{ display: "flex" }}> */}
+          <StyledInput
+            type="email"
+            value={Email}
+            onChange={(e) => {
+              setEmail(e.currentTarget.value);
+            }}
+            placeholder="이메일을 입력해주세요."
+            required
+          />
+          {/* {!Completed && (
               <StyledButton
                 style={{ height: "100%", margin: "auto" }}
                 onClick={emailVeriHandler}
@@ -158,7 +161,7 @@ function RegisterPage() {
                 이메일 인증
               </StyledButton>
             )}
-          </div>
+          </div> */}
         </InputBox>
         {ChkVerify && (
           <InputBox>
