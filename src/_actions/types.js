@@ -1,5 +1,5 @@
-export const SERVER_URL_API = "http://goodsbyus.com/api";
-export const SERVER_URL = "http://goodsbyus.com";
+export const SERVER_URL_API = "https://goodsbyus.com/api";
+export const SERVER_URL = "https://goodsbyus.com";
 
 export const MODE_GET_ALL = "get_all";
 export const MODE_GET_BY_ID = "get_by_id";

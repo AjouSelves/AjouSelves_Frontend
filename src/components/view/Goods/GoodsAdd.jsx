@@ -221,10 +221,10 @@ function GoodsAdd() {
             alignSelf: "center",
             marginTop: "50px",
           }}
-          // onClick={() => {
-          //   alert("등록 요청이 완료되었습니다!");
-          //   navigate("/");
-          // }}
+          onClick={() => {
+            alert("등록이 완료되었습니다!");
+            navigate("/");
+          }}
         >
           굿즈 모집하기
         </StyledButton>
